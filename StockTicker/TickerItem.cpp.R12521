@@ -1,0 +1,60 @@
+#include "TickerItem.h"
+#include "CSVDownloadParse.h"   // downloadFile(), downloadAndParse..
+#include "qstringcssutils.h"
+#include <QStandardPaths>
+#include <QColor>
+#include <QFile>
+#include <QTextStream>
+#include <iomanip>
+#include <sstream>
+#include <iostream>
+
+
+TickerItem::TickerItem(QString symbol) {
+
+    std::vector<QString> parsedCSV = downloadAndParseCSVFile(symbol = symbol.toUpper());
+
+    tickerSymbol = symbol;
+    assignComponents(parsedCSV);
+
+}
+
+void TickerItem::assignComponents(std::vector<QString> &parsedCSV) {
+
+    try {
+        value = parsedCSV.at(0).toDouble();
+        currency = removeQuotationMarks(parsedCSV.at(1));
+        change = removeQuotationMarks(parsedCSV.at(2));
+    } catch (...) {
+        tickerSymbol += "(N/A)";
+        value = 0;
+        change = currency = "---";
+    }
+
+    return;
+}
+
+
+
+void TickerItem::refresh() {
+
+    std::vector<QString> newCSV = downloadAndParseCSVFile(tickerSymbol);
+    assignComponents(newCSV);
+    return;
+
+}
+
+
+
+QString TickerItem::gettickerSymbol() { return tickerSymbol; }
+
+
+QString TickerItem::toString() {
+    QString changeColor(buildColorblock((change.at(0) == '-') ? "red" : "green"));
+
+    return colorizeText(tickerSymbol, "white") + " "
+            + QString::number(value,'d',2) + " " + currency
+            + " (" + colorizeText(change,changeColor) + ")<br>";
+
+}
+
