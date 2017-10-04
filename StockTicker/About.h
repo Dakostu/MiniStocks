@@ -1,3 +1,10 @@
+/*
+ * MiniStocks created by Daniel Kostuj, 2017
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
+
 #ifndef ABOUT_H
 #define ABOUT_H
 

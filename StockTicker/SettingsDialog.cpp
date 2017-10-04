@@ -1,3 +1,10 @@
+/*
+ * MiniStocks created by Daniel Kostuj, 2017
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
+
 #include "SettingsDialog.h"
 #include "ui_settingsdialog.h"
 #include "FileUtils.h"
@@ -22,14 +29,18 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     connect(ui->delTickerButton, &QPushButton::clicked, this, &SettingsDialog::removeTicker);
     connect(ui->okButton, &QPushButton::clicked, this, &SettingsDialog::saveAndClose);
     connect(ui->cancelButton, &QPushButton::clicked, this, &SettingsDialog::close);
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));          // Ctrl+Q -> Cancel
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(saveAndClose()));   // Ctrl+S -> OK
+
+    // Ctrl+Q -> Cancel, Ctrl-S -> OK
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(saveAndClose()));
 
     readTickers();
 
 
 }
 
+
+// Return single SettingsDialog instance
 SettingsDialog& SettingsDialog::getInstance() {
     static SettingsDialog settingsDiag;
     return settingsDiag;
@@ -39,6 +50,7 @@ SettingsDialog& SettingsDialog::getInstance() {
 SettingsDialog::~SettingsDialog() { delete ui; }
 
 
+// Add ticker symbol to QList of ticker symbols
 void SettingsDialog::addTicker() {
     bool ok;
 
@@ -50,8 +62,11 @@ void SettingsDialog::addTicker() {
 
 }
 
+// removes all selected QList ticker symbols
 void SettingsDialog::removeTicker() { qDeleteAll(ui->savedTickList->selectedItems()); }
 
+
+// read ticker symbols from savefile into QList
 void SettingsDialog::readTickers() {
 
     std::vector<QString> savedTickers = loadFile(savename);
@@ -61,6 +76,7 @@ void SettingsDialog::readTickers() {
 }
 
 
+// Save QList into savefile and close window
 bool SettingsDialog::saveAndClose() {
 
     std::vector<QString> newList;
@@ -69,8 +85,8 @@ bool SettingsDialog::saveAndClose() {
     }
 
     if (newList.empty())
-        if (!warnAboutEmptyTicker())
-            return false;
+        if (!warnAboutEmptyTicker())    // Clicked Cancel on warning window...
+            return false;               // -> do not save and close
 
     qDebug() << "Saving";
     saveFile(savename, newList);

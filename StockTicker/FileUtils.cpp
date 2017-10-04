@@ -1,12 +1,20 @@
-#include "FileUtils.h"
+/*
+ * MiniStocks created by Daniel Kostuj, 2017
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
 
+
+#include "FileUtils.h"
 #include <QFile>
 #include <QDir>
 #include <QSaveFile>
 #include <QTextStream>
 #include <fstream>
 
-constStr saveDir = (QStandardPaths::writableLocation(QStandardPaths::HomeLocation)) + "/.ministocks";
+
+constStr saveDir = (QStandardPaths::writableLocation(QStandardPaths::HomeLocation))
+        + "/.ministocks";
 constStr savename = saveDir + "/save";
 constStr tempfile = saveDir + "/tmp.bak";
 constStr csvFileLocation = saveDir + "/quotes.csv";

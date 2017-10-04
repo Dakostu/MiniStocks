@@ -1,9 +1,16 @@
+/*
+ * MiniStocks created by Daniel Kostuj, 2017
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
+
 #include "MainWindow.h"
-#include "TickerRefreshThread.h"
 #include <QApplication>
 #include <QCoreApplication>
 #include <QThread>
 #include <QObject>
+#include <thread>
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -12,10 +19,7 @@ int main(int argc, char *argv[]) {
      MainWindow w;
      w.show();
 
-     //a.setQuitOnLastWindowClosed(true);
      QObject::connect(&w, SIGNAL(exitProg()),&a,SLOT(quit()));
-
-
 
      return a.exec();
 }

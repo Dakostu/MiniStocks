@@ -1,9 +1,17 @@
+/*
+ * MiniStocks created by Daniel Kostuj, 2017
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
+
 #include "QStringCSSUtils.h"
 #include <QStringList>
 #include <math.h>
 
 constStr quotMark("\"");
 constStr tab("\t");
+
 
 QString removeStringToken (constStr &message, constStr &token) {
     QStringList splitted = message.split(token);
