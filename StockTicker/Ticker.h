@@ -1,3 +1,10 @@
+/*
+ * MiniStocks created by Daniel Kostuj, 2017
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
+
 #ifndef TICKER_H
 #define TICKER_H
 
@@ -6,10 +13,11 @@
 #include <QThread>
 
 
-enum WhatData {Symbols, Prices, Currencies, Changes};
+enum WhatData {SYMBOLS, PRICES, CURRENCIES, CHANGES};
 
 class Ticker {
     static std::vector<TickerItem> ticker;
+
     QString dataToString(const WhatData &whatData);
     Ticker();
     static void refresh();

@@ -1,16 +1,22 @@
-#include "TickerItem.h"
-#include "Ticker.h"
-#include "TickerRefreshThread.h"
+/*
+ * MiniStocks created by Daniel Kostuj, 2017
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
+
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
+#include "TickerRefreshThread.h"
+#include "Ticker.h"
 #include "SettingsDialog.h"
 #include "About.h"
+#include <QApplication>
 #include <QLabel>
 #include <QMenu>
 #include <QObject>
 #include <QShortcut>
 #include <thread>
-
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -26,21 +32,23 @@ MainWindow::MainWindow(QWidget *parent) :
 
     currentFont = ui->symbolColumn->font().toString();
 
-
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)),
-        this, SLOT(showContextMenu(const QPoint&)));
-
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(endProgram()));
     new QShortcut(QKeySequence(Qt::Key_A), this, SLOT(openAbout()));
     new QShortcut(QKeySequence(Qt::Key_S), this, SLOT(openSettings()));
     new QShortcut(QKeySequence(Qt::Key_Plus), this, SLOT(increaseFontSize()));
     new QShortcut(QKeySequence(Qt::Key_Minus), this, SLOT(decreaseFontSize()));
 
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)),
+        this, SLOT(showContextMenu(const QPoint&)));
+    connect(this,SIGNAL(launchSigMach()),&sigmach,SLOT(launch()));
+    connect(&sigmach, SIGNAL(requestRefresh()), this, SLOT(loadStockData()));
+
+
+
     loadStockData();
 
-    std::thread refresher(refreshTicker,ui);
-    refresher.detach();
-
+    std::thread tempRefresher(refreshTicker,ui);
+    tempRefresher.detach();
 
 }
 
@@ -119,10 +127,6 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
 void MainWindow::loadStockData() {
 
     instance = Ticker::getInstance();
-    ui->symbolColumn->clear();
-    ui->priceColumn->clear();
-    ui->curColumn->clear();
-    ui->changColumn->clear();
 
     ui->symbolColumn->setText(instance.symbolsToString());
     ui->priceColumn->setText(instance.priceToString());
@@ -130,12 +134,15 @@ void MainWindow::loadStockData() {
     ui->changColumn->setText(instance.changeToString());
 
 
+
 }
 
-#include <QApplication>
+#include <iostream>
 void MainWindow::endProgram() {
-
     emit exitProg();
-
 }
+
+
+
+
 

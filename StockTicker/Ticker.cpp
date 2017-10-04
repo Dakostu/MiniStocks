@@ -1,3 +1,10 @@
+/*
+ * MiniStocks created by Daniel Kostuj, 2017
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
+
 #include "Ticker.h"
 #include "TickerItem.h"
 #include "FileUtils.h"
@@ -44,8 +51,17 @@ Ticker& Ticker::getInstance() {
 
 void Ticker::refresh() {
 
+    std::vector<QString> savedTickers = loadFile(savename);
+    std::vector<TickerItem> tempTickers;
+    for (std::vector<QString>::iterator it = savedTickers.begin(); it != savedTickers.end(); ++it)
+        if (it->length())
+            tempTickers.push_back(TickerItem(*it));
+
+
+    /*for (TickItemIt it = tempTickers.begin(); it != tempTickers.end(); ++it)
+            it->loadItemData();
     for (TickItemIt it = Ticker::ticker.begin(); it != Ticker::ticker.end(); ++it)
-        it->loadItemData();
+        it->loadItemData();*/
 
 }
 
@@ -64,19 +80,19 @@ QString Ticker::dataToString(const WhatData& whatData) {
     std::vector<QString> tempVec;
     TickItemIt it;
     switch (whatData) {
-    case (Symbols):
+    case (SYMBOLS):
         for (it = Ticker::ticker.begin(); it != Ticker::ticker.end(); ++it)
             tempVec.push_back(it->gettickerSymbol());
         break;
-    case (Prices):
+    case (PRICES):
         for (it = Ticker::ticker.begin(); it != Ticker::ticker.end(); ++it)
             tempVec.push_back(it->getPrice());
         break;
-    case (Currencies):
+    case (CURRENCIES):
         for (it = Ticker::ticker.begin(); it != Ticker::ticker.end(); ++it)
             tempVec.push_back(it->getCurrency());
         break;
-    case (Changes):
+    case (CHANGES):
         for (it = Ticker::ticker.begin(); it != Ticker::ticker.end(); ++it)
             tempVec.push_back(it->getChange());
         break;
@@ -95,10 +111,10 @@ QString Ticker::dataToString(const WhatData& whatData) {
 
 }
 
-QString Ticker::symbolsToString() { return dataToString(Symbols); }
-QString Ticker::priceToString() { return dataToString(Prices); }
-QString Ticker::currencyToString() { return dataToString(Currencies); }
-QString Ticker::changeToString() { return dataToString(Changes); }
+QString Ticker::symbolsToString() { return dataToString(SYMBOLS); }
+QString Ticker::priceToString() { return dataToString(PRICES); }
+QString Ticker::currencyToString() { return dataToString(CURRENCIES); }
+QString Ticker::changeToString() { return dataToString(CHANGES); }
 
 QString Ticker::toString() {
 

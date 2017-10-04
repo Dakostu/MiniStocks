@@ -1,11 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "signalmachine.h"
+#include "Ticker.h"
 #include <QMainWindow>
 #include <QMouseEvent>
-#include <thread>
-#include "Ticker.h"
-#include "TickerRefreshThread.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -19,7 +19,8 @@ public:
 
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void loadStockData();
+
+
 
 private:
 
@@ -27,8 +28,11 @@ private:
     Ui::MainWindow *ui;
     Ticker instance = Ticker::getInstance();
     QPoint mpos;
+    SignalMachine sigmach;
+
 
     void changeFontSize(bool increase);
+
 
 protected:
     QString currentFont;
@@ -46,10 +50,12 @@ public slots:
     void openSettings();
     void openAbout();
     void endProgram();
+    void loadStockData();
 
 signals:
     void customContextMenuRequested(const QPoint &pos);
     void exitProg();
+    void launchSigMach();
 
 
 };

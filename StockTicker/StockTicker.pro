@@ -30,25 +30,27 @@ SOURCES += \
         main.cpp \
     Ticker.cpp \
     TickerItem.cpp \
-    CSVDownloadParse.cpp \
     QStringCSSUtils.cpp \
     About.cpp \
     SettingsDialog.cpp \
     FileUtils.cpp \
-    TickerRefreshThread.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    signalmachine.cpp \
+    TickerRefreshThread.cpp
+
 
 
 HEADERS += \
     Ticker.h \
     TickerItem.h \
-    CSVDownloadParse.h \
     QStringCSSUtils.h \
-    TickerRefreshThread.h \
     SettingsDialog.h \
     About.h \
     MainWindow.h \
-    FileUtils.h
+    FileUtils.h \
+    signalmachine.h \
+    TickerRefreshThread.h
+
 
 
 FORMS += \
@@ -56,5 +58,3 @@ FORMS += \
     about.ui \
     mainwindow.ui
 
-DISTFILES += \
-    quotes.csv
