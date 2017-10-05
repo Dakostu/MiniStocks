@@ -30,3 +30,7 @@ Ctrl+Q: Close program
 -: Remove selected ticker 
 
 Ctrl+S: Save 
+
+# ToDo
+- improve memory management 
+- fix window size update when decreasing font sizes or deleting a ticker
