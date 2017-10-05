@@ -16,15 +16,15 @@ class SettingsDialog;
 class SettingsDialog : public QDialog
 {
     Q_OBJECT
-    explicit SettingsDialog(QWidget *parent = 0);
-    ~SettingsDialog();
+
     Ui::SettingsDialog *ui;
 
     void readTickers();
     int warnAboutEmptyTicker();
 
 public:
-    static SettingsDialog& getInstance();
+    explicit SettingsDialog(QWidget *parent = 0);
+    ~SettingsDialog();
 
 
 

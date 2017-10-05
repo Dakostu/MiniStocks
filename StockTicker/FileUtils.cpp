@@ -14,8 +14,8 @@
 
 
 constStr saveDir = (QStandardPaths::writableLocation(QStandardPaths::HomeLocation))
-        + "/.ministocks";
-constStr savename = saveDir + "/save";
+        + "/.ministocks";  // location of all MiniStocks save and temp files
+constStr savename = saveDir + "/savedtickers";
 constStr tempfile = saveDir + "/tmp.bak";
 constStr csvFileLocation = saveDir + "/quotes.csv";
 constStr settingsFile = saveDir + "/settings";
@@ -60,6 +60,7 @@ bool saveFile(constStr &filename, std::vector<QString> vec) {
     return true;
 }
 
+// if designated directory does not exist, create one
 void makeSaveDir() {
 
     if (!QDir(saveDir).exists())

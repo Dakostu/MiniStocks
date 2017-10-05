@@ -12,7 +12,14 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = StockTicker
 TEMPLATE = app
 
-LIBS += -lcurl
+# check if compiling computer has libcurl library
+# else CSV files containing stock data will be downloaded
+# using Qt functions
+packagesExist(curl) {
+    DEFINES += HAS_CURL:
+    LIBS += -lcurl
+}
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -35,7 +42,6 @@ SOURCES += \
     SettingsDialog.cpp \
     FileUtils.cpp \
     MainWindow.cpp \
-    signalmachine.cpp \
     TickerRefreshThread.cpp
 
 
@@ -48,7 +54,6 @@ HEADERS += \
     About.h \
     MainWindow.h \
     FileUtils.h \
-    signalmachine.h \
     TickerRefreshThread.h
 
 

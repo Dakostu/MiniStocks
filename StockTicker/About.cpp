@@ -21,9 +21,3 @@ About::~About()
 {
     delete ui;
 }
-
-About& About::getInstance() {
-    static About aboutWindow;
-    return aboutWindow;
-
-}
