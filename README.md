@@ -6,6 +6,8 @@ MiniStocks is a Qt widget focussing on a minimalistic display of real-time stock
 
 As of now, MiniStocks is in version of 0.1 which means "barely functional". It is still quite rough around the edges but basic functionality is established.
 
+Install MiniStocks by downloading and opening the "build" folder and typing "make" in a CLI. The application is called MiniStocks.
+
 # How to use MiniStocks
 
 MiniStocks saves your list of ticker symbols in a savefile, located in the "./ministocks" folder in your home directory. To add and/or delete ticker symbols while the program is running, open the Settings window by right-clicking on the MainWindow and selecting "Settings" or using the designated shortcut.
