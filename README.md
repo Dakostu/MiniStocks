@@ -10,27 +10,24 @@ Install MiniStocks by downloading and opening the "build" folder and typing "mak
 
 # How to use MiniStocks
 
-MiniStocks saves your list of ticker symbols in a savefile, located in the "./ministocks" folder in your home directory. To add and/or delete ticker symbols while the program is running, open the Settings window by right-clicking on the MainWindow and selecting "Settings" or using the designated shortcut.
+MiniStocks saves your list of ticker symbols in a savefile, located in the "./ministocks" folder in your home directory. 
+
+To add and/or delete ticker symbols while the program is running, open the Settings window by right-clicking on the MainWindow and selecting "Settings" or using the designated shortcut.
 
 ## Shortcuts (MainWindow)
-
 S: Open Settings window
-
 A: Open "About" window
-
 +: Increase font size
-
 -: Decrease font size.
-
 Ctrl+Q: Close program
 
 ## Shortcuts (Settings window)
 +: Add ticker
-
 -: Remove selected ticker 
-
 Ctrl+S: Save 
 
 # ToDo
 - improve memory management 
+- improve stock ticker update implementation
 - fix window size update when decreasing font sizes or deleting a ticker
+- add more settings 
