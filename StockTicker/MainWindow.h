@@ -1,7 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "signalmachine.h"
+#include "About.h"
+#include "SettingsDialog.h"
 #include "Ticker.h"
 #include <QMainWindow>
 #include <QMouseEvent>
@@ -28,7 +29,6 @@ private:
     Ui::MainWindow *ui;
     Ticker instance = Ticker::getInstance();
     QPoint mpos;
-    SignalMachine sigmach;
 
 
     void changeFontSize(bool increase);
@@ -37,6 +37,8 @@ private:
 protected:
     QString currentFont;
     unsigned fontSize;
+    SettingsDialog settingsDia;
+    About aboutDialog;
 
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;

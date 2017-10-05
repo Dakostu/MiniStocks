@@ -10,7 +10,10 @@
 #include <QString>
 #include <vector>
 #include <fstream>
-#include "curl/curl.h"
+#ifdef HAS_CURL
+    #include "curl/curl.h"
+#endif
+
 
 class TickerItem {
 
@@ -24,7 +27,7 @@ class TickerItem {
     void assignComponents(std::vector<QString> &parsedCSV);
 
 public:
-    TickerItem(QString symbol);
+    explicit TickerItem(QString symbol);
     QString toString();
     QString gettickerSymbol();
     QString getPrice();
@@ -33,16 +36,20 @@ public:
     void loadItemData();
 
 protected:
+
+#ifdef HAS_CURL
     CURL *curl;
     FILE *fp;
+#endif
+
     QString changeColor;
     QString sign;
     QString toDownload;
     QString quotes;
 
     void downloadData(const QString &url, const QString &filepath);
-    std::vector<QString> parseCSVintoVector (std::istream& csv);
-    std::vector<QString> downloadAndParseCSVFile(const QString &ticker);
+    void parseCSVintoVector(std::istream& csv);
+    void downloadAndParseCSVFile(const QString &ticker);
 
 };
 

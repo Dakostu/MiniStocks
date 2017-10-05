@@ -8,26 +8,25 @@
 #include "TickerItem.h"
 #include "QStringCSSUtils.h"
 #include "FileUtils.h"
-#include <QStandardPaths>
 #include <QFile>
 #include <QDebug>
-
-#include "curl/curl.h"
-
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QObject>
-#include <QMessageBox>
-#include <QStandardPaths>
-#include <QEventLoop>
-#include <QFileInfo>
+#ifdef HAS_CURL
+    #include "curl/curl.h"
+#else
+    #include <QNetworkAccessManager>
+    #include <QNetworkReply>
+    #include <QEventLoop>
+    #include <QNetworkRequest>
+    #include <QMessageBox>
+    #include <QFileInfo>
+    #include <QObject>
+#endif
 #include <string>
 
 // A TickerItem is instantiated by downloading newest data and assigning it to components
 TickerItem::TickerItem(QString symbol) {
 
-    parsedCSV = downloadAndParseCSVFile(symbol = symbol.toUpper());
+    downloadAndParseCSVFile(symbol = symbol.toUpper());
     tickerSymbol = symbol;
     assignComponents(parsedCSV);
 
@@ -45,9 +44,11 @@ void TickerItem::assignComponents(std::vector<QString> &parsedCSV) {
         //value = change = 0;
         //currency = "---";
         qDebug() << tickerSymbol << "\t TickerItem can not be loaded";
+        return;
     }
 
     return;
+
 }
 
 
@@ -83,13 +84,15 @@ QString TickerItem::toString() {
 // load new data
 void TickerItem::loadItemData() {
     parsedCSV.clear();
-    parsedCSV = downloadAndParseCSVFile(tickerSymbol);
+    downloadAndParseCSVFile(tickerSymbol);
     assignComponents(parsedCSV);
 }
 
 void TickerItem::downloadData(const QString &url, const QString &filepath) {
 
     makeSaveDir();
+
+#ifdef HAS_CURL
 
     if ((curl = curl_easy_init())) {
         fp = fopen(filepath.toLatin1().data(), "wb");
@@ -103,23 +106,23 @@ void TickerItem::downloadData(const QString &url, const QString &filepath) {
     }
 
     throw;
+
 }
 
-/*
-
-
+#else
     QNetworkAccessManager manager;
-    QNetworkRequest request(url);
-    QNetworkReply *reply = manager.get(request);
+    QNetworkReply *reply;
     QEventLoop loop;
+    QString path;
+
+    QNetworkRequest request(url);
+    reply = manager.get(request);
 
     QObject::connect (reply, SIGNAL(finished()),&loop, SLOT(quit()));
 
-
     loop.exec();
 
-    QString path = QUrl(url).path();
-    //QString basename = QFileInfo(path).fileName();
+    path = QUrl(url).path();
 
     QFile file(filepath);
     file.open(QIODevice::WriteOnly);
@@ -128,28 +131,24 @@ void TickerItem::downloadData(const QString &url, const QString &filepath) {
 
     reply->deleteLater();
 
-}*/
+}
+#endif
 
 
 
+// parses raw CSV data and saves it into the TckerItem vector
+void TickerItem::parseCSVintoVector (std::istream& csv) {
 
-// parses raw CSV data and saves it into a vector
-std::vector<QString> TickerItem::parseCSVintoVector (std::istream& csv) {
-
-    std::vector<QString> vec;
     std::string line;
-
 
     // Yahoo Finance CSV data is separated with a comma
     while (std::getline(csv,line,','))
-        vec.push_back(QString::fromStdString(line));
-
-    return vec;
+        parsedCSV.push_back(QString::fromStdString(line));
 
 }
 
 // combine downloadData and parseCSVintoVector to download stock information
-std::vector<QString> TickerItem::downloadAndParseCSVFile(const QString &ticker) {
+void TickerItem::downloadAndParseCSVFile(const QString &ticker) {
 
     // download & save CSV file from Yahoo Finance
     // l1 = Last Trade Price
@@ -162,18 +161,15 @@ std::vector<QString> TickerItem::downloadAndParseCSVFile(const QString &ticker) 
     try {
         downloadData(quotes, saveDir + "/quotes.csv");
     } catch (...) {
-        qDebug() << "CSV for " << ticker << " cannot be downloaded.";
-        std::vector<QString> empty;
-        return empty;
+        qDebug() << "new CSV for " << ticker << " cannot be downloaded.";
+        return;
     }
 
 
     // parse CSV file & delete the file afterwards
     std::ifstream csvFile(csvFileLocation.toStdString());
-    parsedCSV = parseCSVintoVector(csvFile);
+    parseCSVintoVector(csvFile);
     QFile::remove(csvFileLocation);
 
-
-    return parsedCSV;
 
 }

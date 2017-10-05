@@ -1,6 +1,7 @@
 #include "TickerRefreshThread.h"
 #include <unistd.h>
 #include <QApplication>
+#include <QLabel>
 
 void refreshTicker(Ui::MainWindow *ui) {
 
@@ -13,6 +14,7 @@ void refreshTicker(Ui::MainWindow *ui) {
         ui->curColumn->setText(instance.currencyToString());
         ui->changColumn->setText(instance.changeToString());
         qApp->processEvents();
+
 
 
         sleep(0.2);

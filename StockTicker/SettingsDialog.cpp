@@ -40,12 +40,6 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 }
 
 
-// Return single SettingsDialog instance
-SettingsDialog& SettingsDialog::getInstance() {
-    static SettingsDialog settingsDiag;
-    return settingsDiag;
-
-}
 
 SettingsDialog::~SettingsDialog() { delete ui; }
 
@@ -84,8 +78,8 @@ bool SettingsDialog::saveAndClose() {
         newList.push_back(ui->savedTickList->item(i)->text());
     }
 
-    if (newList.empty())
-        if (!warnAboutEmptyTicker())    // Clicked Cancel on warning window...
+    if (newList.empty())                // If an empty list is saved..
+        if (!warnAboutEmptyTicker())    // and user clicked Cancel on warning window...
             return false;               // -> do not save and close
 
     qDebug() << "Saving";

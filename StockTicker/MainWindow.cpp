@@ -23,8 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
-
     ui->setupUi(this);
     this->setWindowFlag(Qt::FramelessWindowHint, true);
     this->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -40,13 +38,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)),
         this, SLOT(showContextMenu(const QPoint&)));
-    connect(this,SIGNAL(launchSigMach()),&sigmach,SLOT(launch()));
-    connect(&sigmach, SIGNAL(requestRefresh()), this, SLOT(loadStockData()));
-
-
 
     loadStockData();
 
+    // launch thread that refreshes MainWindow while it is being displayed
     std::thread tempRefresher(refreshTicker,ui);
     tempRefresher.detach();
 
@@ -54,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow() { delete ui; }
 
-
+// increase or decrease font size of MainWindow ticker list
 void MainWindow::changeFontSize(bool increase) {
     fontSize = ui->symbolColumn->fontInfo().pointSize();
     if (increase)
@@ -74,10 +69,10 @@ void MainWindow::changeFontSize(bool increase) {
 void MainWindow::increaseFontSize() { return changeFontSize(true); }
 void MainWindow::decreaseFontSize() { return changeFontSize(false); }
 
+// opens custom right-click context menu
 void MainWindow::showContextMenu(const QPoint& pos) {
 
     QMenu rightClickMenu(this);
-    //QAction actionMove("Move", this);
     QAction actionSet("Settings\tS", this);
     QAction actionAbo("About\tA", this);
     QAction actionExit("Exit\tCtrl+Q", this);
@@ -94,15 +89,19 @@ void MainWindow::showContextMenu(const QPoint& pos) {
 
 }
 
-void MainWindow::openSettings() { SettingsDialog::getInstance().show(); }
-void MainWindow::openAbout() { About::getInstance().show(); }
+void MainWindow::openSettings() { settingsDia.show(); }
+void MainWindow::openAbout() { aboutDialog.show(); }
 
+// save position of clicked mouse
+// right-click: request custom context menu
 void MainWindow::mousePressEvent(QMouseEvent *event){
     mpos = event->pos();
     if(event->button() == Qt::RightButton)
-            emit customContextMenuRequested(mpos);
+        emit customContextMenuRequested(mpos);
 
 }
+
+// holding a left-click will make the window move:
 void MainWindow::mouseMoveEvent(QMouseEvent *event){
 
     if (event->buttons() & Qt::LeftButton) {
@@ -115,7 +114,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event){
 }
 
 
-
+// reset cursor icon after releasing left mouse button
 void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
 
     if (event->button() == Qt::LeftButton)
@@ -124,6 +123,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
 }
 
 
+// reload Ticker information and update graphical interface
 void MainWindow::loadStockData() {
 
     instance = Ticker::getInstance();
@@ -133,11 +133,10 @@ void MainWindow::loadStockData() {
     ui->curColumn->setText(instance.currencyToString());
     ui->changColumn->setText(instance.changeToString());
 
-
-
 }
 
-#include <iostream>
+// send program exit signal
+// upon closing MainWindow all open windows will be closed
 void MainWindow::endProgram() {
     emit exitProg();
 }
