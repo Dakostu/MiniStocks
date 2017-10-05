@@ -16,14 +16,20 @@ To add and/or delete ticker symbols while the program is running, open the Setti
 
 ## Shortcuts (MainWindow)
 S: Open Settings window
+
 A: Open "About" window
+
 +: Increase font size
+
 -: Decrease font size.
+
 Ctrl+Q: Close program
 
 ## Shortcuts (Settings window)
 +: Add ticker
+
 -: Remove selected ticker 
+
 Ctrl+S: Save 
 
 # ToDo
