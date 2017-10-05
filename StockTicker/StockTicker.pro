@@ -9,7 +9,7 @@ QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = StockTicker
+TARGET = MiniStocks
 TEMPLATE = app
 
 # check if compiling computer has libcurl library
