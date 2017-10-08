@@ -10,27 +10,21 @@ Install MiniStocks by downloading and opening the "build" folder and typing "mak
 
 # How to use MiniStocks
 
-MiniStocks saves your list of ticker symbols in a savefile, located in the "./ministocks" folder in your home directory. 
+MiniStocks fetches real-time stock data from Yahoo Finance to update its stock ticker. The list of ticker symbols is saved in a savefile, located in the "./ministocks" folder in your home directory. 
 
 To add and/or delete ticker symbols while the program is running, open the Settings window by right-clicking on the MainWindow and selecting "Settings" or using the designated shortcut.
 
 ## Shortcuts (MainWindow)
-S: Open Settings window
-
-A: Open "About" window
-
-+: Increase font size
-
--: Decrease font size.
-
-Ctrl+Q: Close program
+- S: Open Settings window
+- A: Open "About" window
+- +: Increase font size
+- -: Decrease font size.
+- Ctrl+Q: Close program
 
 ## Shortcuts (Settings window)
-+: Add ticker
-
--: Remove selected ticker 
-
-Ctrl+S: Save 
+- +: Add ticker
+- -: Remove selected ticker 
+- Ctrl+S: Save 
 
 # ToDo
 - improve memory management 
