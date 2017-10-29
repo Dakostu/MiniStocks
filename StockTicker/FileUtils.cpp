@@ -15,7 +15,7 @@
 
 constStr saveDir = (QStandardPaths::writableLocation(QStandardPaths::HomeLocation))
         + "/.ministocks";  // location of all MiniStocks save and temp files
-constStr savename = saveDir + "/savedtickers";
+constStr savename = saveDir + "/save";
 constStr tempfile = saveDir + "/tmp.bak";
 constStr csvFileLocation = saveDir + "/quotes.csv";
 constStr settingsFile = saveDir + "/settings";
