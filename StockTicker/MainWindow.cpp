@@ -60,7 +60,6 @@ void MainWindow::changeFontSize(bool increase) {
 
     ui->symbolColumn->setFont(QFont(currentFont,fontSize));
     ui->priceColumn->setFont(QFont(currentFont,fontSize));
-    ui->curColumn->setFont(QFont(currentFont,fontSize));
     ui->changColumn->setFont(QFont(currentFont,fontSize));
     this->adjustSize();
 
@@ -130,7 +129,6 @@ void MainWindow::loadStockData() {
 
     ui->symbolColumn->setText(instance.symbolsToString());
     ui->priceColumn->setText(instance.priceToString());
-    ui->curColumn->setText(instance.currencyToString());
     ui->changColumn->setText(instance.changeToString());
 
 }

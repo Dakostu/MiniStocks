@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>134</width>
+    <width>136</width>
     <height>42</height>
    </rect>
   </property>
@@ -120,41 +120,6 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="curColumn">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color:lightgray</string>
-         </property>
-         <property name="text">
-          <string>c</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-         <property name="indent">
-          <number>6</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="spacer3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>10</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
         <widget class="QLabel" name="changColumn">
          <property name="enabled">
           <bool>false</bool>
@@ -173,11 +138,9 @@
       </layout>
       <zorder>symbolColumn</zorder>
       <zorder>priceColumn</zorder>
-      <zorder>curColumn</zorder>
       <zorder>changColumn</zorder>
       <zorder>spacer2</zorder>
       <zorder>spacer1</zorder>
-      <zorder>spacer3</zorder>
      </widget>
     </item>
    </layout>

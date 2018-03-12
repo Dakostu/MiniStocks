@@ -32,18 +32,15 @@ TickerItem::TickerItem(QString symbol) {
 
 }
 
-
 // assigns parsed data from CSV file to TickerItem components
 void TickerItem::assignComponents(std::vector<QString> &parsedCSV) {
 
     try {
-        value = parsedCSV.at(0).toDouble();
-        currency = removeStringToken(parsedCSV.at(1), quotMark);
-        change = stringIntoDoubleRounded(removeStringToken(parsedCSV.at(2), quotMark));
-    } catch (...) { // Spelling error? Connection problems? Stock not existing anymore?
-        //value = change = 0;
-        //currency = "---";
+        value = parsedCSV.at(2).toDouble();
+        change = 1.00 - parsedCSV.at(1).toDouble() / value;
+    } catch (const std::exception& e) { // Spelling error? Connection problems? Stock not existing anymore?
         qDebug() << tickerSymbol << "\t TickerItem can not be loaded";
+        qDebug() << e.what();
         return;
     }
 
@@ -51,13 +48,10 @@ void TickerItem::assignComponents(std::vector<QString> &parsedCSV) {
 
 }
 
-
-// Obvious getter functions
+// Obvious getter methods
 QString TickerItem::gettickerSymbol() { return tickerSymbol.mid(0,9); }
 
 QString TickerItem::getPrice() { return QString::number(value,'d',2);}
-
-QString TickerItem::getCurrency() { return currency; }
 
 QString TickerItem::getChange() {
     changeColor = (change < 0 ) ? "red" : "green";
@@ -65,9 +59,9 @@ QString TickerItem::getChange() {
     return ("(" + colorizeText(sign + QString::number(change,'d',2)+"%", changeColor) + ")");
 }
 
-
-// Old toString function, for debug purposes
+// Old toString method, for debug purposes
 QString TickerItem::toString() {
+
     // Percentage shall be either in green or red color, depending on sign
     changeColor = (change < 0 ) ? "red" : "green";
     sign = (change >= 0) ? "+" : "";
@@ -83,9 +77,11 @@ QString TickerItem::toString() {
 
 // load new data
 void TickerItem::loadItemData() {
+
     parsedCSV.clear();
     downloadAndParseCSVFile(tickerSymbol);
     assignComponents(parsedCSV);
+
 }
 
 void TickerItem::downloadData(const QString &url, const QString &filepath) {
@@ -108,7 +104,6 @@ void TickerItem::downloadData(const QString &url, const QString &filepath) {
     throw;
 
 }
-
 #else
     QNetworkAccessManager manager;
     QNetworkReply *reply;
@@ -134,14 +129,12 @@ void TickerItem::downloadData(const QString &url, const QString &filepath) {
 }
 #endif
 
-
-
 // parses raw CSV data and saves it into the TckerItem vector
 void TickerItem::parseCSVintoVector (std::istream& csv) {
 
     std::string line;
 
-    // Yahoo Finance CSV data is separated with a comma
+    // IEXTradingData consists of two lines:
     while (std::getline(csv,line,','))
         parsedCSV.push_back(QString::fromStdString(line));
 
@@ -150,26 +143,19 @@ void TickerItem::parseCSVintoVector (std::istream& csv) {
 // combine downloadData and parseCSVintoVector to download stock information
 void TickerItem::downloadAndParseCSVFile(const QString &ticker) {
 
-    // download & save CSV file from Yahoo Finance
-    // l1 = Last Trade Price
-    // c4 = Currency
-    // p2 = Change in Percent
-    // See: http://www.canbike.org/information-technology/yahoo-finance-url-download-to-a-csv-file.html
-    toDownload = "l1c4p2";
-    quotes = "http://download.finance.yahoo.com/d/quotes.csv?s=" + ticker
-                         + "&f=" + toDownload + "&e=.csv";
+    // download & save JSON file from Stooq
+    quotes = "https://stooq.com/q/l/?s=" + ticker + ".us&f=soc&e=csv";
     try {
-        downloadData(quotes, saveDir + "/quotes.csv");
+        downloadData(quotes, CSVFileLocation);
     } catch (...) {
-        qDebug() << "new CSV for " << ticker << " cannot be downloaded.";
+        qDebug() << "new CSV file for " << ticker << " cannot be downloaded.";
         return;
     }
 
 
-    // parse CSV file & delete the file afterwards
-    std::ifstream csvFile(csvFileLocation.toStdString());
+    // parse CSV file & delete it afterwards
+    std::ifstream csvFile(CSVFileLocation.toStdString());
     parseCSVintoVector(csvFile);
-    QFile::remove(csvFileLocation);
-
+    QFile::remove(CSVFileLocation);
 
 }

@@ -43,9 +43,11 @@ Ticker::Ticker() {
 
 
 Ticker& Ticker::getInstance() {
+
     static Ticker t;
     t.refresh();
     return t;
+
 }
 
 
@@ -56,8 +58,6 @@ void Ticker::refresh() {
     for (std::vector<QString>::iterator it = savedTickers.begin(); it != savedTickers.end(); ++it)
         if (it->length())
             ticker.push_back(TickerItem(*it));
-
-
 
 }
 
@@ -73,6 +73,7 @@ std::vector<QString> Ticker::getAllTickerSymbols() {
 
 
 QString Ticker::dataToString(const WhatData& whatData) {
+
     std::vector<QString> tempVec;
     TickItemIt it;
     switch (whatData) {
@@ -84,18 +85,13 @@ QString Ticker::dataToString(const WhatData& whatData) {
         for (it = ticker.begin(); it != ticker.end(); ++it)
             tempVec.push_back(it->getPrice());
         break;
-    case (CURRENCIES):
-        for (it = ticker.begin(); it != ticker.end(); ++it)
-            tempVec.push_back(it->getCurrency());
-        break;
     case (CHANGES):
         for (it = ticker.begin(); it != ticker.end(); ++it)
             tempVec.push_back(it->getChange());
         break;
     default:
-        return NULL;
+        return nullptr;
         break;
-
     }
 
     QString str("<pre>");
@@ -103,13 +99,13 @@ QString Ticker::dataToString(const WhatData& whatData) {
         str += *it;
         str += (it < tempVec.end()-1) ? "<br>" : "</pre>";
     }
+
     return str;
 
 }
 
 QString Ticker::symbolsToString() { return dataToString(SYMBOLS); }
 QString Ticker::priceToString() { return dataToString(PRICES); }
-QString Ticker::currencyToString() { return dataToString(CURRENCIES); }
 QString Ticker::changeToString() { return dataToString(CHANGES); }
 
 QString Ticker::toString() {

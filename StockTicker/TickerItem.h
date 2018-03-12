@@ -21,9 +21,19 @@ class TickerItem {
     double value;
     QString currency;
     double change;
+    QString changeColor;
+    QString sign;
+    QString toDownload;
+    QString quotes;
     std::vector<QString> parsedCSV;
+#ifdef HAS_CURL
+    CURL *curl;
+    FILE *fp;
+#endif
 
-
+    void downloadData(const QString &url, const QString &filepath);
+    void parseCSVintoVector(std::istream& csv);
+    void downloadAndParseCSVFile(const QString &ticker);
     void assignComponents(std::vector<QString> &parsedCSV);
 
 public:
@@ -31,25 +41,10 @@ public:
     QString toString();
     QString gettickerSymbol();
     QString getPrice();
-    QString getCurrency();
     QString getChange();
     void loadItemData();
 
 protected:
-
-#ifdef HAS_CURL
-    CURL *curl;
-    FILE *fp;
-#endif
-
-    QString changeColor;
-    QString sign;
-    QString toDownload;
-    QString quotes;
-
-    void downloadData(const QString &url, const QString &filepath);
-    void parseCSVintoVector(std::istream& csv);
-    void downloadAndParseCSVFile(const QString &ticker);
 
 };
 

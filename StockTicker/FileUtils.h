@@ -14,11 +14,10 @@
 
 typedef const QString constStr;
 
-
 extern constStr saveDir;
 extern constStr savename;
 extern constStr tempfile;
-extern constStr csvFileLocation;
+extern constStr CSVFileLocation;
 extern constStr settingsFile;
 
 bool checkifFile(constStr &filename);

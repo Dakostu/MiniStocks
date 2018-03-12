@@ -13,7 +13,7 @@
 #include <QThread>
 
 
-enum WhatData {SYMBOLS, PRICES, CURRENCIES, CHANGES};
+enum WhatData {SYMBOLS, PRICES, CHANGES};
 
 class Ticker {
     static std::vector<TickerItem> ticker;
@@ -27,7 +27,6 @@ public:
     std::vector<QString> getAllTickerSymbols();    
     QString symbolsToString();
     QString priceToString();
-    QString currencyToString();
     QString changeToString();
     QString toString();
     static Ticker& getInstance();
