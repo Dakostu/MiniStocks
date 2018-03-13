@@ -12,7 +12,7 @@ void refreshTicker(Ui::MainWindow *ui) {
         ui->priceColumn->setText(instance.priceToString());
         ui->changColumn->setText(instance.changeToString());
 
-        sleep(0.2);
+        sleep(0.5);
     }
 
     return;

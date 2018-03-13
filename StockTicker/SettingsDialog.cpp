@@ -36,19 +36,17 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 
     readTickers();
 
-
 }
 
-
-
-SettingsDialog::~SettingsDialog() { delete ui; }
-
+SettingsDialog::~SettingsDialog() {
+    delete ui;
+}
 
 // Add ticker symbol to QList of ticker symbols
 void SettingsDialog::addTicker() {
     bool ok;
 
-    QString ticker = QInputDialog::getText(this, tr("Add ticker"), tr("Enter ticker name"),
+    QString ticker = QInputDialog::getText(this, tr("Add ticker"), tr("Enter ticker name\n"),
     QLineEdit::Normal, "", &ok);
     if (ok && !ticker.isNull()) {
         ui->savedTickList->addItem(ticker.toUpper());
@@ -69,18 +67,18 @@ void SettingsDialog::readTickers() {
             ui->savedTickList->addItem(*it);
 }
 
-
 // Save QList into savefile and close window
 bool SettingsDialog::saveAndClose() {
 
-    std::vector<QString> newList;
-    for (int i = 0; i < ui->savedTickList->count(); ++i) {
-        newList.push_back(ui->savedTickList->item(i)->text());
+    if (ui->savedTickList->count() == 0     // If an empty list is saved..
+            && !warnAboutEmptyTicker()) {   // and user clicked Cancel on warning window...
+        readTickers();                      // -> load previously saved tickers
+        return false;                       // -> do not save and close warning window
     }
 
-    if (newList.empty())                // If an empty list is saved..
-        if (!warnAboutEmptyTicker())    // and user clicked Cancel on warning window...
-            return false;               // -> do not save and close
+    std::vector<QString> newList;
+    for (int i = 0; i < ui->savedTickList->count(); ++i)
+        newList.push_back(ui->savedTickList->item(i)->text());
 
     qDebug() << "Saving";
     saveFile(savename, newList);

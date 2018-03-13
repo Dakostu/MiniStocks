@@ -37,9 +37,9 @@ void TickerItem::assignComponents(std::vector<QString> &parsedCSV) {
 
     try {
         value = parsedCSV.at(2).toDouble();
-        change = 1.00 - parsedCSV.at(1).toDouble() / value;
+        change = (value - parsedCSV.at(1).toDouble()) / value;
     } catch (const std::exception& e) { // Spelling error? Connection problems? Stock not existing anymore?
-        qDebug() << tickerSymbol << "\t TickerItem can not be loaded";
+        qDebug() << tickerSymbol << ":\t TickerItem can not be loaded";
         qDebug() << e.what();
         return;
     }
@@ -144,7 +144,7 @@ void TickerItem::parseCSVintoVector (std::istream& csv) {
 void TickerItem::downloadAndParseCSVFile(const QString &ticker) {
 
     // download & save JSON file from Stooq
-    quotes = "https://stooq.com/q/l/?s=" + ticker + ".us&f=soc&e=csv";
+    quotes = "https://stooq.com/q/l/?s=" + ticker + "&f=soc&e=csv";
     try {
         downloadData(quotes, CSVFileLocation);
     } catch (...) {

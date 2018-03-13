@@ -20,7 +20,8 @@
 
 typedef std::vector<TickerItem>::iterator TickItemIt;
 
-const QString defaultTickers[] = {"^SPX","AAPL","GOOG","CL=F","GC=F","EURUSD=X"};
+const QString defaultTickers[] = {"^SPX","AAPL.US","GOOG.US","CL.F","GC.F","EURUSD"};
+
 std::vector<TickerItem> Ticker::ticker;
 // Ticker is instantiated by either creating a default or loading savefile
 Ticker::Ticker() {
