@@ -1,4 +1,4 @@
-**ATTENTION: YAHOO FINANCE HAS DISABLED THEIR .CSV STOCK DATA API SERVICE. BECAUSE OF THAT, THIS PROGRAM WILL NOT WORK AS OF NOW.**
+**ATTENTION: THIS PROGRAM IS IN THE PROCESS OF SWITCHING APIs FOR FINANCIAL INFORMATION. DATA FROM stooq.com IS BEING USED NOW.
 
 # MiniStocks
 
@@ -20,7 +20,7 @@ To add and/or delete ticker symbols while the program is running, open the Setti
 - S: Open Settings window
 - A: Open "About" window
 - +: Increase font size
-- -: Decrease font size.
+- -: Decrease font size
 - Ctrl+Q: Close program
 
 ## Shortcuts (Settings window)
