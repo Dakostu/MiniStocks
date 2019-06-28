@@ -14,12 +14,6 @@
 
 typedef const QString constStr;
 
-extern constStr saveDir;
-extern constStr savename;
-extern constStr tempfile;
-extern constStr CSVFileLocation;
-extern constStr settingsFile;
-
 bool checkifFile(constStr &filename);
 std::vector<QString> loadFile(constStr &filename);
 bool saveFile(constStr &filename, std::vector<QString> vec);

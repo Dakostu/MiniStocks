@@ -13,13 +13,6 @@
 #include <fstream>
 
 
-constStr saveDir = (QStandardPaths::writableLocation(QStandardPaths::HomeLocation))
-        + "/.ministocks";  // location of all MiniStocks save and temp files
-constStr savename = saveDir + "/savedtickers";
-constStr tempfile = saveDir + "/tmp.bak";
-constStr CSVFileLocation = saveDir + "/quotes.csv";
-constStr settingsFile = saveDir + "/settings";
-
 
 // Assign pointer to savefile and check if the file can be opened & contains info
 bool checkifFile(constStr &filename) {

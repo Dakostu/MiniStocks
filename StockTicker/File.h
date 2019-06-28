@@ -1,5 +1,5 @@
-#ifndef TICKER_FILE_H
-#define TICKER_FILE_H
+#ifndef FILE_H
+#define FILE_H
 
 #include <vector>
 #include <QString>
@@ -7,12 +7,15 @@
 
 using constStr = const QString;
 
-class TickerFile
+class File
 {
+
+    QString fileName;
+
 public:
 
 
-    TickerFile(constStr &fileName);
+    File(constStr &fileName);
 
     bool checkifFile(constStr &filename);
     std::vector<QString> loadFile(constStr &filename);
