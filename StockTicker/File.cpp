@@ -16,13 +16,17 @@ File::~File() {
 }
 
 
-bool File::checkifFile(constStr &filename) {
-    QFile file(filename);
+bool File::fileIsValid() {
     return (file.exists() && file.size() && !file.error());
 }
 
 
 std::vector<QString> File::loadContents() {
+
+    if (!fileIsValid()) {
+        throw "file " + fileName + " is not a valid file";
+    }
+
     file.open(QIODevice::ReadOnly);
 
     if (!file.isReadable()) {

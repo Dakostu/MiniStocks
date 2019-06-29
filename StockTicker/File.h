@@ -22,8 +22,7 @@ public:
     File(constStr &fileName);
     ~File();
 
-    bool checkifFile(constStr &filename);
-
+    bool fileExists();
     std::vector<QString> loadContents();
     bool saveContentsToFile(const std::vector<QString> &vec);
     void makeSaveDir();
