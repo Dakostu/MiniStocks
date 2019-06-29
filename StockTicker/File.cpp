@@ -4,8 +4,8 @@
 
 File::File(constStr &fileName){
     this->fileName = fileName;
+    QFile file(this->fileName);
 }
-
 
 
 bool File::checkifFile(constStr &filename) {
@@ -13,18 +13,18 @@ bool File::checkifFile(constStr &filename) {
     return (file.exists() && file.size() && !file.error());
 }
 
-std::vector<QString> File::loadFile(constStr &filename) {
-    makeSaveDir();
 
-    QFile file(filename);
+std::vector<QString> File::loadContents() {
     std::vector<QString> tickVec;
     file.open(QIODevice::ReadOnly);
 
     while (!file.atEnd())
         tickVec.push_back(file.readLine().trimmed()); // trimmed(): Remove linebreak
 
+    file.reset();
     return tickVec;
 }
+
 
 bool File::saveFile(constStr &filename, std::vector<QString> vec) {
     makeSaveDir();

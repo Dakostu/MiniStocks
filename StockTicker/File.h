@@ -2,6 +2,7 @@
 #define FILE_H
 
 #include <vector>
+#include <QFile>
 #include <QString>
 #include <QStandardPaths>
 
@@ -11,6 +12,8 @@ class File
 {
 
     QString fileName;
+    QFile file;
+    std::vector<QString> fileContent;
 
 public:
 
@@ -18,7 +21,8 @@ public:
     File(constStr &fileName);
 
     bool checkifFile(constStr &filename);
-    std::vector<QString> loadFile(constStr &filename);
+
+    std::vector<QString> loadContents();
     bool saveFile(constStr &filename, std::vector<QString> vec);
     void makeSaveDir();
 
