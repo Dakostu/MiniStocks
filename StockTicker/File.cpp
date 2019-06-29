@@ -8,6 +8,11 @@ File::File(constStr &fileName){
 }
 
 
+File::~File() {
+    file.close();
+}
+
+
 bool File::checkifFile(constStr &filename) {
     QFile file(filename);
     return (file.exists() && file.size() && !file.error());

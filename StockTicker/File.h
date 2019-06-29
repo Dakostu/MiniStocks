@@ -15,8 +15,9 @@ class File
     QFile file;
     std::vector<QString> fileContent;
 
-public:
+    ~File();
 
+public:
 
     File(constStr &fileName);
 
