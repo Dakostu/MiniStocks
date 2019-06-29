@@ -1,6 +1,7 @@
 #include "File.h"
 #include <fstream>
 #include <QDir>
+#include <QException>
 
 File::File(constStr &fileName){
     this->fileName = fileName;
@@ -9,7 +10,9 @@ File::File(constStr &fileName){
 
 
 File::~File() {
-    file.close();
+    if (file.isOpen()) {
+        file.close();
+    }
 }
 
 
@@ -20,28 +23,28 @@ bool File::checkifFile(constStr &filename) {
 
 
 std::vector<QString> File::loadContents() {
-    std::vector<QString> tickVec;
+    std::vector<QString> contentsVec;
     file.open(QIODevice::ReadOnly);
 
     while (!file.atEnd())
-        tickVec.push_back(file.readLine().trimmed()); // trimmed(): Remove linebreak
+        contentsVec.emplace_back(file.readLine().trimmed()); // trimmed(): Remove linebreak
 
-    file.reset();
-    return tickVec;
+    file.close();
+    return contentsVec;
 }
 
 
-bool File::saveFile(constStr &filename, std::vector<QString> vec) {
-    makeSaveDir();
+bool File::saveContentsToFile(const std::vector<QString> &vec) {
+    file.open(QIODevice::WriteOnly);
 
-    std::ofstream save(filename.toStdString());
+    for (auto line : vec) {
+        file.write(line.toUtf8());
+    }
 
-    for (std::vector<QString>::iterator it = vec.begin(); it != vec.end(); ++it)
-        save << it->toStdString()<< "\n";
-
-    save.close();
+    file.close();
     return true;
 }
+
 
 void File::makeSaveDir() {
     if (!QDir(getSaveDir()).exists())
