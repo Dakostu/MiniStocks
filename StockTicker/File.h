@@ -10,16 +10,17 @@ using constStr = const QString;
 
 class File
 {
+protected:
 
     QString fileName;
     QFile file;
     std::vector<QString> fileContent;
 
-    ~File();
 
 public:
 
     File(constStr &fileName);
+    ~File();
 
     bool checkifFile(constStr &filename);
 
