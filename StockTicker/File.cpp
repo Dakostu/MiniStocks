@@ -23,9 +23,13 @@ bool File::checkifFile(constStr &filename) {
 
 
 std::vector<QString> File::loadContents() {
-    std::vector<QString> contentsVec;
     file.open(QIODevice::ReadOnly);
 
+    if (!file.isReadable()) {
+        throw "file " + fileName + " is not readable";
+    }
+
+    std::vector<QString> contentsVec;
     while (!file.atEnd())
         contentsVec.emplace_back(file.readLine().trimmed()); // trimmed(): Remove linebreak
 
@@ -36,6 +40,10 @@ std::vector<QString> File::loadContents() {
 
 bool File::saveContentsToFile(const std::vector<QString> &vec) {
     file.open(QIODevice::WriteOnly);
+
+    if (!file.isWritable()) {
+        return false;
+    }
 
     for (auto line : vec) {
         file.write(line.toUtf8());
