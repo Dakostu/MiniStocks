@@ -73,7 +73,7 @@ std::vector<QString> Ticker::getAllTickerSymbols() {
 
     std::vector<QString> symbVec;
     for (auto tickerItem : ticker)
-        symbVec.emplace_back(tickerItem);
+        symbVec.emplace_back(tickerItem.gettickerSymbol());
     return symbVec;
 
 }
