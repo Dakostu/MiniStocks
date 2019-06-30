@@ -4,8 +4,8 @@
 #include <QException>
 
 File::File(constStr &fileName){
-    this->fileName = fileName;
-    QFile file(this->fileName);
+    this->fileName = fileName;    
+    file.setFileName(fileName);
 }
 
 
@@ -43,6 +43,7 @@ std::vector<QString> File::loadContents() {
 
 
 bool File::saveContentsToFile(const std::vector<QString> &vec) {
+    File::makeSaveDir();
     file.open(QIODevice::WriteOnly);
 
     if (!file.isWritable()) {
@@ -51,6 +52,7 @@ bool File::saveContentsToFile(const std::vector<QString> &vec) {
 
     for (auto line : vec) {
         file.write(line.toUtf8());
+        file.write("\n");
     }
 
     file.close();
