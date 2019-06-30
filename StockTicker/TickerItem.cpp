@@ -86,7 +86,7 @@ void TickerItem::loadItemData() {
 
 void TickerItem::downloadData(const QString &url, const QString &filepath) {
 
-    makeSaveDir();
+    File::makeSaveDir();
 
 #ifdef HAS_CURL
 

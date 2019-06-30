@@ -5,9 +5,9 @@
  */
 
 
+#include "File.h"
 #include "SettingsDialog.h"
 #include "ui_settingsdialog.h"
-#include "FileUtils.h"
 #include "Ticker.h"
 #include <QDebug>
 #include <QDialogButtonBox>
@@ -81,7 +81,9 @@ bool SettingsDialog::saveAndClose() {
         newList.push_back(ui->savedTickList->item(i)->text());
 
     qDebug() << "Saving";
-    saveFile(savename, newList);
+
+    File saveFile(File::getSaveName());
+    saveFile.saveContentsToFile(newList);
     return this->close();
 
 }
