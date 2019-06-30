@@ -1,6 +1,18 @@
 #include "File.h"
 #include "TickerInfoDownloader.h"
 #include <QDebug>
+#ifdef HAS_CURL
+    #include "curl/curl.h"
+#else
+    #include <QNetworkAccessManager>
+    #include <QNetworkReply>
+    #include <QEventLoop>
+    #include <QNetworkRequest>
+    #include <QMessageBox>
+    #include <QFileInfo>
+    #include <QObject>
+#endif
+
 
 TickerInfoDownloader::TickerInfoDownloader(const QString &ticker) : tickerSymbol(ticker)
 {
@@ -59,7 +71,7 @@ std::vector<QString> TickerInfoDownloader::parseCSVintoVector(std::istream& csv)
 
     // IEXTradingData consists of two lines:
     while (std::getline(csv,line,','))
-        parsedCSV.emplace_back(line);
+        parsedCSV.emplace_back(QString::fromStdString(line));
 
     return parsedCSV;
 }
