@@ -17,7 +17,7 @@ File::~File() {
 
 
 bool File::fileIsValid() {
-    return (file.exists() && file.size() && !file.error());
+    return (file.exists() && !file.error());
 }
 
 

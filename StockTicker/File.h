@@ -22,7 +22,7 @@ public:
     File(constStr &fileName);
     ~File();
 
-    bool fileExists();
+    bool fileIsValid();
     std::vector<QString> loadContents();
     bool saveContentsToFile(const std::vector<QString> &vec);
     void makeSaveDir();
