@@ -36,13 +36,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     File.cpp \
     TickerInfoDownloader.cpp \
+    dialogs/About.cpp \
+    dialogs/MainWindow.cpp \
+    dialogs/SettingsDialog.cpp \
+    file/File.cpp \
         main.cpp \
     Ticker.cpp \
     TickerItem.cpp \
     About.cpp \
     SettingsDialog.cpp \
     MainWindow.cpp \
-    TickerRefreshThread.cpp
+    TickerRefreshThread.cpp \
+    ticker/Ticker.cpp \
+    ticker/TickerInfoDownloader.cpp \
+    ticker/TickerItem.cpp \
+    ticker/TickerRefreshThread.cpp
 
 
 
@@ -54,11 +62,22 @@ HEADERS += \
     SettingsDialog.h \
     About.h \
     MainWindow.h \
-    TickerRefreshThread.h
+    TickerRefreshThread.h \
+    dialogs/About.h \
+    dialogs/MainWindow.h \
+    dialogs/SettingsDialog.h \
+    file/File.h \
+    ticker/Ticker.h \
+    ticker/TickerInfoDownloader.h \
+    ticker/TickerItem.h \
+    ticker/TickerRefreshThread.h
 
 
 
 FORMS += \
+    dialogs/about.ui \
+    dialogs/mainwindow.ui \
+    dialogs/settingsdialog.ui \
     settingsdialog.ui \
     about.ui \
     mainwindow.ui
