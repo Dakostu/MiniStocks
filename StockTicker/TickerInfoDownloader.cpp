@@ -77,7 +77,7 @@ std::vector<QString> TickerInfoDownloader::parseCSVintoVector(std::istream& csv)
 }
 
 void TickerInfoDownloader::downloadAndParseCSVFile() {
-    auto fileName = "/quotes/" + tickerSymbol + ".csv";
+    auto fileName = "/quotes_" + tickerSymbol + ".csv";
     auto csvFileLocation = File::getFileInSaveDir(fileName);
     // download & save JSON file from Stooq
     auto quotes = "https://stooq.com/q/l/?s=" + tickerSymbol + "&f=soc&e=csv";
