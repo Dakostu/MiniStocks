@@ -4,10 +4,9 @@
  * found in the LICENSE file.
  */
 
-
+#include "File.h"
 #include "Ticker.h"
 #include "TickerItem.h"
-#include "FileUtils.h"
 #include <QFile>
 #include <QIODevice>
 #include <QTextStream>
@@ -20,24 +19,24 @@
 
 typedef std::vector<TickerItem>::iterator TickItemIt;
 
-const QString defaultTickers[] = {"^SPX","AAPL.US","GOOG.US","CL.F","GC.F","EURUSD"};
+static const std::vector<QString> defaultTickers = {"^SPX","AAPL.US","GOOG.US","CL.F","GC.F","EURUSD"};
 
 std::vector<TickerItem> Ticker::ticker;
 // Ticker is instantiated by either creating a default or loading savefile
 Ticker::Ticker() {
 
     ticker.clear();
-    // default Ticker
-    if (!checkifFile(savename)) {
-        for (unsigned i = 0; i < (sizeof(defaultTickers) / sizeof(*defaultTickers)); ++i)
-            ticker.push_back(TickerItem(defaultTickers[i]));
-        saveFile(savename,getAllTickerSymbols());
-    // loaded Ticker
+
+    File savedTickers(File::getSaveName());
+
+    // load Ticker from file, if the file doesn't exist, use the default
+    if (savedTickers.fileIsValid()) {
+        auto savedTickerItems = savedTickers.loadContents();
+        for (auto tickerItem : savedTickerItems) {
+            ticker.emplace_back(tickerItem);
+        }
     } else {
-        std::vector<QString> savedTickers = loadFile(savename);
-        for (std::vector<QString>::iterator it = savedTickers.begin(); it != savedTickers.end(); ++it)
-            if (it->length())
-                ticker.push_back(TickerItem(*it));
+        savedTickers.saveContentsToFile(defaultTickers);
     }
 
 }
@@ -54,11 +53,16 @@ Ticker& Ticker::getInstance() {
 
 void Ticker::refresh() {
 
-    std::vector<QString> savedTickers = loadFile(savename);
+    File savedTickers(File::getSaveName());
+
+    auto savedTickerItems = savedTickers.loadContents();
+    if (savedTickerItems.empty())
+        return;
+
     ticker.clear();
-    for (std::vector<QString>::iterator it = savedTickers.begin(); it != savedTickers.end(); ++it)
-        if (it->length())
-            ticker.push_back(TickerItem(*it));
+    for (auto tickerItem : savedTickerItems) {
+        ticker.emplace_back(tickerItem);
+    }
 
 }
 
@@ -89,9 +93,6 @@ QString Ticker::dataToString(const WhatData& whatData) {
     case (CHANGES):
         for (it = ticker.begin(); it != ticker.end(); ++it)
             tempVec.push_back(it->getChange());
-        break;
-    default:
-        return nullptr;
         break;
     }
 

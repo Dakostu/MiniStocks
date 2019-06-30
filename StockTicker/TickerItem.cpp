@@ -5,9 +5,9 @@
  */
 
 
+#include "File.h"
 #include "TickerItem.h"
 #include "QStringCSSUtils.h"
-#include "FileUtils.h"
 #include <QFile>
 #include <QDebug>
 #ifdef HAS_CURL
@@ -143,10 +143,11 @@ void TickerItem::parseCSVintoVector (std::istream& csv) {
 // combine downloadData and parseCSVintoVector to download stock information
 void TickerItem::downloadAndParseCSVFile(const QString &ticker) {
 
+    auto csvFileLocation = File::getFileInSaveDir("/quotes.csv");
     // download & save JSON file from Stooq
     quotes = "https://stooq.com/q/l/?s=" + ticker + "&f=soc&e=csv";
     try {
-        downloadData(quotes, CSVFileLocation);
+        downloadData(quotes, csvFileLocation);
     } catch (...) {
         qDebug() << "new CSV file for " << ticker << " cannot be downloaded.";
         return;
@@ -154,8 +155,8 @@ void TickerItem::downloadAndParseCSVFile(const QString &ticker) {
 
 
     // parse CSV file & delete it afterwards
-    std::ifstream csvFile(CSVFileLocation.toStdString());
+    std::ifstream csvFile(csvFileLocation.toStdString());
     parseCSVintoVector(csvFile);
-    QFile::remove(CSVFileLocation);
+    QFile::remove(csvFileLocation);
 
 }
