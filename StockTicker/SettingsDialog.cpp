@@ -60,11 +60,11 @@ void SettingsDialog::removeTicker() { qDeleteAll(ui->savedTickList->selectedItem
 
 // read ticker symbols from savefile into QList
 void SettingsDialog::readTickers() {
+    File saveFile(File::getSaveName());
 
-    std::vector<QString> savedTickers = loadFile(savename);
-    for (std::vector<QString>::iterator it = savedTickers.begin(); it != savedTickers.end(); ++it)
-        if (it->length())
-            ui->savedTickList->addItem(*it);
+    auto savedTickers = saveFile.loadContents();
+    for (auto ticker : savedTickers)
+        ui->savedTickList->addItem(ticker);
 }
 
 // Save QList into savefile and close window
