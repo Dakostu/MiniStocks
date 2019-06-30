@@ -31,9 +31,6 @@ class TickerItem {
     FILE *fp;
 #endif
 
-    void downloadData(const QString &url, const QString &filepath);
-    void parseCSVintoVector(std::istream& csv);
-    void downloadAndParseCSVFile(const QString &ticker);
     void assignComponents(std::vector<QString> &parsedCSV);
 
 public:
