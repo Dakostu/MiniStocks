@@ -21,8 +21,6 @@
 #include <vector>
 
 
-typedef std::vector<TickerItem>::iterator TickItemIt;
-
 static const std::vector<QString> defaultTickers = {"^SPX","AAPL.US","GOOG.US","CL.F","GC.F","EURUSD"};
 
 std::vector<TickerItem> Ticker::ticker;
@@ -74,8 +72,8 @@ void Ticker::refresh() {
 std::vector<QString> Ticker::getAllTickerSymbols() {
 
     std::vector<QString> symbVec;
-    for (TickItemIt it = ticker.begin(); it != ticker.end(); ++it)
-        symbVec.push_back(it->gettickerSymbol());
+    for (auto tickerItem : ticker)
+        symbVec.emplace_back(tickerItem);
     return symbVec;
 
 }
@@ -84,24 +82,23 @@ std::vector<QString> Ticker::getAllTickerSymbols() {
 QString Ticker::dataToString(const WhatData& whatData) {
 
     std::vector<QString> tempVec;
-    TickItemIt it;
     switch (whatData) {
     case (SYMBOLS):
-        for (it = ticker.begin(); it != ticker.end(); ++it)
-            tempVec.push_back(it->gettickerSymbol());
+        for (auto tickerItem : ticker)
+            tempVec.emplace_back(tickerItem.gettickerSymbol());
         break;
     case (PRICES):
-        for (it = ticker.begin(); it != ticker.end(); ++it)
-            tempVec.push_back(it->getPrice());
+        for (auto tickerItem : ticker)
+            tempVec.emplace_back(tickerItem.getPrice());
         break;
     case (CHANGES):
-        for (it = ticker.begin(); it != ticker.end(); ++it)
-            tempVec.push_back(it->getChange());
+        for (auto tickerItem : ticker)
+            tempVec.emplace_back(tickerItem.getChange());
         break;
     }
 
     QString str("<pre>");
-    for (std::vector<QString>::iterator it = tempVec.begin(); it != tempVec.end(); ++it) {
+    for (auto it = tempVec.begin(); it != tempVec.end(); ++it) {
         str += *it;
         str += (it < tempVec.end()-1) ? "<br>" : "</pre>";
     }
@@ -117,7 +114,7 @@ QString Ticker::changeToString() { return dataToString(CHANGES); }
 QString Ticker::toString() {
 
     QString str("<pre>");
-    for (TickItemIt it = ticker.begin(); it != ticker.end(); ++it) {
+    for (auto it = ticker.begin(); it != ticker.end(); ++it) {
         str += it->toString();
         str += (it < ticker.end()-1) ? "<br>" : "</pre>";
     }
