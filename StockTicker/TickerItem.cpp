@@ -7,7 +7,6 @@
 
 #include "File.h"
 #include "TickerItem.h"
-#include "QStringCSSUtils.h"
 #include <QFile>
 #include <QDebug>
 #include <string>
@@ -19,7 +18,6 @@ TickerItem::TickerItem(QString symbol) : tickerSymbol(symbol.toUpper()), infoDow
 
 // assigns parsed data from CSV file to TickerItem components
 void TickerItem::assignComponents(std::vector<QString> &parsedCSV) {
-
     try {
         value = parsedCSV.at(2).toDouble();
         change = (value - parsedCSV.at(1).toDouble()) / value;
@@ -30,7 +28,14 @@ void TickerItem::assignComponents(std::vector<QString> &parsedCSV) {
     }
 
     return;
+}
 
+QString TickerItem::buildColorblock (const QString  &color){
+    return "<font color = \"" + color + "\">";
+}
+
+QString TickerItem::colorizeText (const QString &message, const QString &color) {
+    return buildColorblock(color) + message + "</font>";
 }
 
 // Obvious getter methods
@@ -51,12 +56,13 @@ QString TickerItem::toString() {
     changeColor = (change < 0 ) ? "red" : "green";
     sign = (change >= 0) ? "+" : "";
 
+    const QString tab("\t");
+
     return tickerSymbol.mid(0,9) + tab
             + QString::number(value,'d',2) + tab + currency
             + tab + "("
             + colorizeText(sign + QString::number(change,'d',2)+"%", changeColor)
             + ")";
-
 }
 
 // load new data
@@ -64,3 +70,4 @@ void TickerItem::loadItemData() {
     itemData = infoDownloader.getData();
     assignComponents(itemData);
 }
+

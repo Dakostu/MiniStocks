@@ -39,7 +39,6 @@ SOURCES += \
         main.cpp \
     Ticker.cpp \
     TickerItem.cpp \
-    QStringCSSUtils.cpp \
     About.cpp \
     SettingsDialog.cpp \
     MainWindow.cpp \
@@ -52,7 +51,6 @@ HEADERS += \
     Ticker.h \
     TickerInfoDownloader.h \
     TickerItem.h \
-    QStringCSSUtils.h \
     SettingsDialog.h \
     About.h \
     MainWindow.h \
