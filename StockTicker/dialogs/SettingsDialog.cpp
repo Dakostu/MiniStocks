@@ -8,10 +8,10 @@
  */
 
 
-#include "File.h"
+#include "../file/File.h"
 #include "SettingsDialog.h"
 #include "ui_settingsdialog.h"
-#include "Ticker.h"
+#include "../ticker/Ticker.h"
 #include <QDebug>
 #include <QDialogButtonBox>
 #include <QDoubleSpinBox>
@@ -104,12 +104,10 @@ int SettingsDialog::warnAboutEmptyTicker() {
         case QMessageBox::Ok:
             emptyWarning.close();
             return 1;
-            break;
         case QMessageBox::Cancel:
         default:
             emptyWarning.close();
             return 0;
-            break;
 
     }
     return -1;

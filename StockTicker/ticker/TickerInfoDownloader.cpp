@@ -8,7 +8,7 @@
  * found in the LICENSE file.
  */
 
-#include "File.h"
+#include "../file/File.h"
 #include "TickerInfoDownloader.h"
 #include <QDebug>
 #ifdef HAS_CURL

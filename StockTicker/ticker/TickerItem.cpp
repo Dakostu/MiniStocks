@@ -9,7 +9,7 @@
  */
 
 
-#include "File.h"
+#include "../file/File.h"
 #include "TickerItem.h"
 #include <QFile>
 #include <QDebug>

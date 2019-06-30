@@ -5,7 +5,7 @@
  */
 
 
-#include "MainWindow.h"
+#include "dialogs/MainWindow.h"
 #include <QApplication>
 #include <QCoreApplication>
 #include <QThread>

@@ -14,7 +14,7 @@
 
 #include "About.h"
 #include "SettingsDialog.h"
-#include "Ticker.h"
+#include "../ticker/Ticker.h"
 #include <QMainWindow>
 #include <QMouseEvent>
 

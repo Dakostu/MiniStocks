@@ -8,7 +8,7 @@
  * found in the LICENSE file.
  */
 
-#include "File.h"
+#include "../file/File.h"
 #include "Ticker.h"
 #include "TickerItem.h"
 #include <QFile>

@@ -8,10 +8,10 @@
  * found in the LICENSE file.
  */
 
+#include "../ticker/TickerRefreshThread.h"
+#include "../ticker/Ticker.h"
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
-#include "TickerRefreshThread.h"
-#include "Ticker.h"
 #include "SettingsDialog.h"
 #include "About.h"
 #include <QApplication>
