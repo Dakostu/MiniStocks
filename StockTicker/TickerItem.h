@@ -7,13 +7,10 @@
 #ifndef TICKERITEM_H
 #define TICKERITEM_H
 
+#include "TickerInfoDownloader.h"
 #include <QString>
 #include <vector>
 #include <fstream>
-#ifdef HAS_CURL
-    #include "curl/curl.h"
-#endif
-
 
 class TickerItem {
 
@@ -23,13 +20,9 @@ class TickerItem {
     double change;
     QString changeColor;
     QString sign;
-    QString toDownload;
-    QString quotes;
-    std::vector<QString> parsedCSV;
-#ifdef HAS_CURL
-    CURL *curl;
-    FILE *fp;
-#endif
+    std::vector<QString> itemData;
+
+    TickerInfoDownloader infoDownloader;
 
     void assignComponents(std::vector<QString> &parsedCSV);
 

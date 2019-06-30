@@ -10,26 +10,11 @@
 #include "QStringCSSUtils.h"
 #include <QFile>
 #include <QDebug>
-#ifdef HAS_CURL
-    #include "curl/curl.h"
-#else
-    #include <QNetworkAccessManager>
-    #include <QNetworkReply>
-    #include <QEventLoop>
-    #include <QNetworkRequest>
-    #include <QMessageBox>
-    #include <QFileInfo>
-    #include <QObject>
-#endif
 #include <string>
 
 // A TickerItem is instantiated by downloading newest data and assigning it to components
-TickerItem::TickerItem(QString symbol) {
-
-    downloadAndParseCSVFile(symbol = symbol.toUpper());
-    tickerSymbol = symbol;
-    assignComponents(parsedCSV);
-
+TickerItem::TickerItem(QString symbol) : tickerSymbol(symbol.toUpper()), infoDownloader(tickerSymbol) {
+    loadItemData();
 }
 
 // assigns parsed data from CSV file to TickerItem components
@@ -74,15 +59,8 @@ QString TickerItem::toString() {
 
 }
 
-
 // load new data
 void TickerItem::loadItemData() {
-
-    parsedCSV.clear();
-    downloadAndParseCSVFile(tickerSymbol);
-    assignComponents(parsedCSV);
-
-}
-
-void TickerItem::downloadAndParseCSVFile(const QString &ticker) {
+    itemData = infoDownloader.getData();
+    assignComponents(itemData);
 }
