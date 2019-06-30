@@ -1,0 +1,6 @@
+build/*.cpp
+build/*.o
+build/*.c
+build/*.h
+build/*.ui
+build/StockTicker 
