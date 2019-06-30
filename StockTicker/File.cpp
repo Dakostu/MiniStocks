@@ -3,9 +3,8 @@
 #include <QDir>
 #include <QException>
 
-File::File(constStr &fileName){
+File::File(constStr &fileName) : file(fileName){
     this->fileName = fileName;    
-    file.setFileName(fileName);
 }
 
 
