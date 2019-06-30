@@ -1,5 +1,8 @@
 /*
- * MiniStocks created by Daniel Kostuj, 2017
+ * MiniStocks created by Daniel Kostuj
+ *
+ * This file contains all definitions for the About window.
+ *
  * Use of this source code is governed by the license that can be
  * found in the LICENSE file.
  */

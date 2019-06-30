@@ -1,8 +1,12 @@
 /*
- * MiniStocks created by Daniel Kostuj, 2017
+ * MiniStocks created by Daniel Kostuj
+ *
+ * This file contains all declarations for the Settings dialog.
+ *
  * Use of this source code is governed by the license that can be
  * found in the LICENSE file.
  */
+
 
 #ifndef SETTINGSDIALOG_H
 #define SETTINGSDIALOG_H

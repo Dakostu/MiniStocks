@@ -1,9 +1,12 @@
 /*
- * MiniStocks created by Daniel Kostuj, 2017
+ * MiniStocks created by Daniel Kostuj
+ *
+ * This file contains all definitions for the Main window
+ * (black window that shows all tickers and prices)
+ *
  * Use of this source code is governed by the license that can be
  * found in the LICENSE file.
  */
-
 
 #include "MainWindow.h"
 #include "ui_mainwindow.h"

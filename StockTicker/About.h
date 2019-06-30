@@ -1,5 +1,8 @@
 /*
- * MiniStocks created by Daniel Kostuj, 2017
+ * MiniStocks created by Daniel Kostuj
+ *
+ * This file contains all declarations for the About window.
+ *
  * Use of this source code is governed by the license that can be
  * found in the LICENSE file.
  */
@@ -19,7 +22,7 @@ class About : public QDialog
     Q_OBJECT
 
 public:
-    explicit About(QWidget *parent = 0);
+    explicit About(QWidget *parent = nullptr);
     ~About();
 
 

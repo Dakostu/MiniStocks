@@ -1,3 +1,13 @@
+/*
+ * MiniStocks created by Daniel Kostuj
+ *
+ * This file contains all declarations for the File class.
+ * The File class allows easy file content loading/saving.
+ *
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
 #ifndef FILE_H
 #define FILE_H
 

@@ -1,3 +1,12 @@
+/*
+ * MiniStocks created by Daniel Kostuj
+ *
+ * This file contains all definitions for the Ticker refresh thread.
+ *
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
 #include "TickerRefreshThread.h"
 #include <unistd.h>
 #include <QApplication>
@@ -12,7 +21,7 @@ void refreshTicker(Ui::MainWindow *ui) {
         ui->priceColumn->setText(instance.priceToString());
         ui->changColumn->setText(instance.changeToString());
 
-        sleep(0.5);
+        sleep(1);
     }
 
     return;

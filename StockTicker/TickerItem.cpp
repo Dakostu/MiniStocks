@@ -1,5 +1,9 @@
 /*
- * MiniStocks created by Daniel Kostuj, 2017
+ * MiniStocks created by Daniel Kostuj
+ *
+ * This file contains all definitions for the TickerItem class.
+ * The TickerItem class parses the downloaded stock data into a displayable string.
+ *
  * Use of this source code is governed by the license that can be
  * found in the LICENSE file.
  */

@@ -1,3 +1,14 @@
+/*
+ * MiniStocks created by Daniel Kostuj
+ *
+ * This file contains all definitions for the File class.
+ * The File class allows easy file content loading/saving.
+ *
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
+
 #include "File.h"
 #include <fstream>
 #include <QDir>

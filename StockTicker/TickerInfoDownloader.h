@@ -1,3 +1,13 @@
+/*
+ * MiniStocks created by Daniel Kostuj
+ *
+ * This file contains all declarations for the TickerInfoDownloader class.
+ * The TickerInfoDownloader class downloads the newest stock price info for a single ticker.
+ *
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+
 #ifndef TICKERINFODOWNLOADER_H
 #define TICKERINFODOWNLOADER_H
 
