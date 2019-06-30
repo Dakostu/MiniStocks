@@ -25,7 +25,7 @@ public:
     bool fileIsValid();
     std::vector<QString> loadContents();
     bool saveContentsToFile(const std::vector<QString> &vec);
-    void makeSaveDir();
+    static void makeSaveDir();
 
     static constStr getSaveDir();
     static constStr getFileInSaveDir(constStr &fileName);
