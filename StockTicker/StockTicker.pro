@@ -35,6 +35,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     File.cpp \
+    TickerInfoDownloader.cpp \
         main.cpp \
     Ticker.cpp \
     TickerItem.cpp \
@@ -49,6 +50,7 @@ SOURCES += \
 HEADERS += \
     File.h \
     Ticker.h \
+    TickerInfoDownloader.h \
     TickerItem.h \
     QStringCSSUtils.h \
     SettingsDialog.h \
