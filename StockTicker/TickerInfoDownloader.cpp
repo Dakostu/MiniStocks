@@ -1,5 +1,6 @@
 #include "File.h"
 #include "TickerInfoDownloader.h"
+#include <QDebug>
 
 TickerInfoDownloader::TickerInfoDownloader(const QString &ticker) : tickerSymbol(ticker)
 {
@@ -52,29 +53,37 @@ void TickerInfoDownloader::downloadData(const QString &url, const QString &filep
 #endif
 
 // parses raw CSV data and saves it into the TckerItem vector
-void TickerInfoDownloader::parseCSVintoVector(std::istream& csv) {
+std::vector<QString> TickerInfoDownloader::parseCSVintoVector(std::istream& csv) {
     std::string line;
+    std::vector<QString> parsedCSV;
 
     // IEXTradingData consists of two lines:
     while (std::getline(csv,line,','))
-        parsedCSV.push_back(QString::fromStdString(line));
+        parsedCSV.emplace_back(line);
+
+    return parsedCSV;
 }
 
-void TickerInfoDownloader::downloadAndParseCSVFile(const QString &ticker) {
-    auto csvFileLocation = File::getFileInSaveDir("/quotes.csv");
+void TickerInfoDownloader::downloadAndParseCSVFile() {
+    auto fileName = "/quotes/" + tickerSymbol + ".csv";
+    auto csvFileLocation = File::getFileInSaveDir(fileName);
     // download & save JSON file from Stooq
-    quotes = "https://stooq.com/q/l/?s=" + ticker + "&f=soc&e=csv";
+    auto quotes = "https://stooq.com/q/l/?s=" + tickerSymbol + "&f=soc&e=csv";
     try {
         downloadData(quotes, csvFileLocation);
     } catch (...) {
-        qDebug() << "new CSV file for " << ticker << " cannot be downloaded.";
+        qDebug() << "new CSV file for " << tickerSymbol << " cannot be downloaded.";
         return;
     }
 
 
     // parse CSV file & delete it afterwards
     std::ifstream csvFile(csvFileLocation.toStdString());
-    parseCSVintoVector(csvFile);
+    this->stockData = parseCSVintoVector(csvFile);
     QFile::remove(csvFileLocation);
+}
 
+std::vector<QString> TickerInfoDownloader::getData() {
+    downloadAndParseCSVFile();
+    return this->stockData;
 }

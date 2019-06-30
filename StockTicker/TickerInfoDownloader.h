@@ -7,6 +7,7 @@
 
 #include <QString>
 #include <fstream>
+#include <vector>
 
 class TickerInfoDownloader
 {
@@ -16,13 +17,14 @@ class TickerInfoDownloader
 #endif
 
     const QString tickerSymbol;
+    void downloadData(const QString &url, const QString &filepath);
+    std::vector<QString> parseCSVintoVector(std::istream& csv);
+    void downloadAndParseCSVFile();
+    std::vector<QString> stockData;
 
 public:    
     TickerInfoDownloader(const QString &ticker);
-
-    void downloadData(const QString &url, const QString &filepath);
-    void parseCSVintoVector(std::istream& csv);
-    void downloadAndParseCSVFile(const QString &ticker);
+    std::vector<QString> getData();
 };
 
 #endif // TICKERINFODOWNLOADER_H
