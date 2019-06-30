@@ -41,7 +41,6 @@ SOURCES += \
     QStringCSSUtils.cpp \
     About.cpp \
     SettingsDialog.cpp \
-    FileUtils.cpp \
     MainWindow.cpp \
     TickerRefreshThread.cpp
 
@@ -55,7 +54,6 @@ HEADERS += \
     SettingsDialog.h \
     About.h \
     MainWindow.h \
-    FileUtils.h \
     TickerRefreshThread.h
 
 
