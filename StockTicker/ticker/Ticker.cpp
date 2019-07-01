@@ -12,9 +12,6 @@
 #include "Ticker.h"
 #include "TickerItem.h"
 #include <QFile>
-#include <QIODevice>
-#include <QTextStream>
-#include <QStandardPaths>
 #include <iostream>
 #include <fstream>
 #include <functional>
