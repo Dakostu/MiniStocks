@@ -11,7 +11,6 @@
 
 #include "../file/File.h"
 #include "TickerItem.h"
-#include <QFile>
 #include <QDebug>
 #include <string>
 

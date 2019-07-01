@@ -14,7 +14,6 @@
 #include "TickerInfoDownloader.h"
 #include <QString>
 #include <vector>
-#include <fstream>
 
 class TickerItem {
 

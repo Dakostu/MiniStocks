@@ -18,9 +18,9 @@
 #include <QInputDialog>
 #include <QFontDialog>
 #include <QListWidget>
-#include <vector>
 #include <QShortcut>
 #include <QMessageBox>
+#include <vector>
 
 
 SettingsDialog::SettingsDialog(QWidget *parent) :

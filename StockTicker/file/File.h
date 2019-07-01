@@ -14,7 +14,6 @@
 #include <vector>
 #include <QFile>
 #include <QString>
-#include <QStandardPaths>
 
 using constStr = const QString;
 
