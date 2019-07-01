@@ -10,7 +10,7 @@
 #include <QCoreApplication>
 #include <QThread>
 #include <QObject>
-#include <thread>
+
 using namespace std;
 
 int main(int argc, char *argv[]) {

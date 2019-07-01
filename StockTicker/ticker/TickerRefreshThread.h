@@ -9,6 +9,7 @@
 
 #ifndef TICKERREFRESHTHREAD_H
 #define TICKERREFRESHTHREAD_H
+
 #include "ui_mainwindow.h"
 #include "../dialogs/MainWindow.h"
 

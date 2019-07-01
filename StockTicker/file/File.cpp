@@ -8,11 +8,10 @@
  * found in the LICENSE file.
  */
 
-
 #include "File.h"
 #include <fstream>
 #include <QDir>
-#include <QException>
+#include <QStandardPaths>
 
 File::File(constStr &fileName) : file(fileName){
     this->fileName = fileName;    
