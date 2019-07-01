@@ -15,9 +15,9 @@
 #include <QIODevice>
 #include <QTextStream>
 #include <QStandardPaths>
-#include <sstream>
 #include <iostream>
 #include <fstream>
+#include <functional>
 #include <vector>
 
 
@@ -81,21 +81,15 @@ std::vector<QString> Ticker::getAllTickerSymbols() {
 
 QString Ticker::dataToString(const WhatData& whatData) {
 
+    std::vector<std::function<QString(TickerItem)>> dataCallbacks
+                                                 = {&TickerItem::gettickerSymbol,
+                                                    &TickerItem::getPrice,
+                                                    &TickerItem::getChange};
+
     std::vector<QString> tempVec;
-    switch (whatData) {
-    case (SYMBOLS):
-        for (auto tickerItem : ticker)
-            tempVec.emplace_back(tickerItem.gettickerSymbol());
-        break;
-    case (PRICES):
-        for (auto tickerItem : ticker)
-            tempVec.emplace_back(tickerItem.getPrice());
-        break;
-    case (CHANGES):
-        for (auto tickerItem : ticker)
-            tempVec.emplace_back(tickerItem.getChange());
-        break;
-    }
+
+    for (auto tickerItem : ticker)
+        tempVec.emplace_back(dataCallbacks.at(whatData)(tickerItem));
 
     QString str("<pre>");
     for (auto it = tempVec.begin(); it != tempVec.end(); ++it) {
