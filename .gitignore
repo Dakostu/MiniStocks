@@ -4,3 +4,4 @@ build/*.c
 build/*.h
 build/*.ui
 build/StockTicker 
+StockTicker/StockTicker.pro.user
