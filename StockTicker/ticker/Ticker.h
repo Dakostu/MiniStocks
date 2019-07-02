@@ -25,6 +25,7 @@ class Ticker {
     QString dataToString(const WhatData &whatData);
     Ticker();
     static void refresh();
+    static void loadTickersFromVector(const std::vector<QString> &tickerVec);
 
 
 public:    

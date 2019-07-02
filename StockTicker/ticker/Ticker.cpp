@@ -31,9 +31,7 @@ Ticker::Ticker() {
     // load Ticker from file, if the file doesn't exist, use the default
     if (savedTickers.fileIsValid()) {
         auto savedTickerItems = savedTickers.loadContents();
-        for (auto tickerItem : savedTickerItems) {
-            ticker.emplace_back(tickerItem);
-        }
+        loadTickersFromVector(savedTickerItems);
     } else {
         savedTickers.saveContentsToFile(defaultTickers);
     }
@@ -49,19 +47,25 @@ Ticker& Ticker::getInstance() {
 
 }
 
+void Ticker::loadTickersFromVector(const std::vector<QString> &tickerVec) {
+
+    if (tickerVec.empty())
+        return;
+
+    ticker.clear();
+    for (auto tickerItem : tickerVec) {
+        TickerItem temp(tickerItem);
+        ticker.emplace_back(temp);
+    }
+
+}
 
 void Ticker::refresh() {
 
     File savedTickers(File::getSaveName());
 
     auto savedTickerItems = savedTickers.loadContents();
-    if (savedTickerItems.empty())
-        return;
-
-    ticker.clear();
-    for (auto tickerItem : savedTickerItems) {
-        ticker.emplace_back(tickerItem);
-    }
+    loadTickersFromVector(savedTickerItems);
 
 }
 
