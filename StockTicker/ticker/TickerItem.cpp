@@ -16,7 +16,6 @@
 
 // A TickerItem is instantiated by downloading newest data and assigning it to components
 TickerItem::TickerItem(QString symbol) : tickerSymbol(symbol.toUpper()), infoDownloader(tickerSymbol) {
-    loadItemData();
 }
 
 // load new data
