@@ -12,6 +12,7 @@
 #ifndef TICKER_H
 #define TICKER_H
 
+#include "../file/File.h"
 #include "TickerItem.h"
 #include <vector>
 #include <QThread>
@@ -27,6 +28,7 @@ class Ticker {
     Ticker();
     static void refresh();
     static void loadTickersFromVector(const std::vector<QString> &tickerVec);
+    static File savedTickers;
 
 
 public:    

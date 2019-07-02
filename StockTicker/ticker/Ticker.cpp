@@ -22,6 +22,7 @@ static const std::vector<QString> defaultTickers = {"^SPX","AAPL.US","GOOG.US","
 
 std::vector<TickerItem> Ticker::ticker;
 std::vector<QString> Ticker::loadedTickerSymbols;
+File Ticker::savedTickers(File::getSaveName());
 
 // Ticker is instantiated by either creating a default or loading savefile
 Ticker::Ticker() {
@@ -48,8 +49,6 @@ Ticker& Ticker::getInstance() {
 std::vector<QString> Ticker::loadTickerSymbolsFromSettingsFile() {
 
     ticker.clear();
-
-    File savedTickers(File::getSaveName());
 
     std::vector<QString> tempTickerSymbols;
     // load Ticker from file, if the file doesn't exist, use the default
