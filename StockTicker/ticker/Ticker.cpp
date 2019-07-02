@@ -2,7 +2,7 @@
  * MiniStocks created by Daniel Kostuj
  *
  * This file contains all definitions for the Ticker class.
- * The Ticker class is the class that saves/loads all Ticker item data and displays them.
+ * The Ticker class is the Singleton class that saves/loads all Ticker item data and displays them.
  *
  * Use of this source code is governed by the license that can be
  * found in the LICENSE file.
@@ -21,20 +21,13 @@
 static const std::vector<QString> defaultTickers = {"^SPX","AAPL.US","GOOG.US","CL.F","GC.F","EURUSD"};
 
 std::vector<TickerItem> Ticker::ticker;
+std::vector<QString> Ticker::loadedTickerSymbols;
+
 // Ticker is instantiated by either creating a default or loading savefile
 Ticker::Ticker() {
 
-    ticker.clear();
-
-    File savedTickers(File::getSaveName());
-
-    // load Ticker from file, if the file doesn't exist, use the default
-    if (savedTickers.fileIsValid()) {
-        auto savedTickerItems = savedTickers.loadContents();
-        loadTickersFromVector(savedTickerItems);
-    } else {
-        savedTickers.saveContentsToFile(defaultTickers);
-    }
+    loadedTickerSymbols = loadTickerSymbolsFromSettingsFile();
+    loadTickersFromVector(loadedTickerSymbols);
 
 }
 
@@ -44,6 +37,24 @@ Ticker& Ticker::getInstance() {
     static Ticker t;
     t.refresh();
     return t;
+
+}
+
+std::vector<QString> Ticker::loadTickerSymbolsFromSettingsFile() {
+
+    ticker.clear();
+
+    File savedTickers(File::getSaveName());
+
+    std::vector<QString> tempTickerSymbols;
+    // load Ticker from file, if the file doesn't exist, use the default
+    if (savedTickers.fileIsValid()) {
+        tempTickerSymbols = savedTickers.loadContents();
+    } else {
+        tempTickerSymbols = defaultTickers;
+    }
+
+    return tempTickerSymbols;
 
 }
 
@@ -63,10 +74,7 @@ void Ticker::loadTickersFromVector(const std::vector<QString> &tickerVec) {
 
 void Ticker::refresh() {
 
-    File savedTickers(File::getSaveName());
-
-    auto savedTickerItems = savedTickers.loadContents();
-    loadTickersFromVector(savedTickerItems);
+    loadTickersFromVector(loadedTickerSymbols);
 
 }
 
