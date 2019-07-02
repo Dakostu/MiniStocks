@@ -31,6 +31,11 @@ Ticker::Ticker() {
 
 }
 
+Ticker::~Ticker() {
+    File savedTickers(File::getSaveName());
+    savedTickers.saveContentsToFile(loadedTickerSymbols);
+}
+
 
 Ticker& Ticker::getInstance() {
 

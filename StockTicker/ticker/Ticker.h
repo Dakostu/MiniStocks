@@ -30,6 +30,7 @@ class Ticker {
 
 
 public:    
+    ~Ticker();
     std::vector<QString> getAllTickerSymbols();    
     QString symbolsToString();
     QString priceToString();
