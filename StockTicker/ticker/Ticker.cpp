@@ -28,22 +28,12 @@ File Ticker::savedTickers(File::getSaveName());
 Ticker::Ticker() {
 
     loadedTickerSymbols = loadTickerSymbolsFromSettingsFile();
-    loadTickersFromVector(loadedTickerSymbols);
 
 }
 
 Ticker::~Ticker() {
     File savedTickers(File::getSaveName());
     savedTickers.saveContentsToFile(loadedTickerSymbols);
-}
-
-
-Ticker& Ticker::getInstance() {
-
-    static Ticker t;
-    t.refresh();
-    return t;
-
 }
 
 std::vector<QString> Ticker::loadTickerSymbolsFromSettingsFile() {
@@ -62,6 +52,21 @@ std::vector<QString> Ticker::loadTickerSymbolsFromSettingsFile() {
 
 }
 
+Ticker& Ticker::getInstance() {
+
+    static Ticker t;
+    t.refresh();
+    return t;
+
+}
+
+void Ticker::refresh() {
+
+    loadTickersFromVector(loadedTickerSymbols);
+
+}
+
+
 void Ticker::loadTickersFromVector(const std::vector<QString> &tickerVec) {
 
     if (tickerVec.empty())
@@ -76,13 +81,6 @@ void Ticker::loadTickersFromVector(const std::vector<QString> &tickerVec) {
 
 }
 
-void Ticker::refresh() {
-
-    loadTickersFromVector(loadedTickerSymbols);
-
-}
-
-
 std::vector<QString> Ticker::getAllTickerSymbols() {
 
     std::vector<QString> symbVec;
@@ -91,7 +89,6 @@ std::vector<QString> Ticker::getAllTickerSymbols() {
     return symbVec;
 
 }
-
 
 QString Ticker::dataToString(const WhatData& whatData) {
 

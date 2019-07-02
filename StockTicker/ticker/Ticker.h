@@ -40,7 +40,6 @@ public:
     QString toString();
     static Ticker& getInstance();
     static std::vector<QString> loadTickerSymbolsFromSettingsFile();
-    //static void saveLoadedTickerSymbolsIntoFile();
 
 };
 
