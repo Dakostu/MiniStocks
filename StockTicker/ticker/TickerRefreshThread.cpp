@@ -12,7 +12,7 @@
 #include <QApplication>
 #include <QLabel>
 
-void refreshTicker(Ui::MainWindow *ui) {
+[[ noreturn ]] void refreshTicker(Ui::MainWindow *ui) {
 
     while (1) {
         Ticker instance = Ticker::getInstance();
@@ -24,5 +24,4 @@ void refreshTicker(Ui::MainWindow *ui) {
         sleep(1);
     }
 
-    return;
 }

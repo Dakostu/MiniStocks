@@ -13,7 +13,7 @@
 #include "ui_mainwindow.h"
 #include "../dialogs/MainWindow.h"
 
-void refreshTicker(Ui::MainWindow *ui);
+[[ noreturn ]] void refreshTicker(Ui::MainWindow *ui);
 
 
 #endif // TICKERREFRESHTHREAD_H
