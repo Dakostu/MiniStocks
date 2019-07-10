@@ -3,5 +3,6 @@
 class TickerItemUnitTest : public QObject {
     Q_OBJECT
 private slots:
-    void instantiateTickerItem();
+    void instantiateTickerItemTest();
+    void componentCSVParsingTest();
 };
