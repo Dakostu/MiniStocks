@@ -1,1 +1,1 @@
-g++ UnitTests.cpp -o Tests && ./Tests
+g++ UnitTests.cpp ../ticker/*.cpp -o Tests && ./Tests

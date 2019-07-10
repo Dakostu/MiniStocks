@@ -43,7 +43,6 @@ SOURCES += \
     ticker/TickerInfoDownloader.cpp \
     ticker/TickerItem.cpp \
     ticker/TickerRefreshThread.cpp \
-    unittests/UnitTests.cpp
 
 
 
@@ -56,7 +55,6 @@ HEADERS += \
     ticker/TickerInfoDownloader.h \
     ticker/TickerItem.h \
     ticker/TickerRefreshThread.h \
-    unittests/catch.hpp
 
 
 
