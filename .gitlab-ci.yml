@@ -7,6 +7,7 @@ build-qt:
     stage: build
     script: 
             - cd StockTicker
+            - qmake
             - make
 
 unit-tests:
