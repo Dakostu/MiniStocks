@@ -10,3 +10,5 @@ void TickerItemUnitTest::instantiateTickerItem() {
     QCOMPARE("VERYLARGECO", item2.gettickerSymbol());
 
 }
+
+QTEST_MAIN(TickerItemUnitTest)

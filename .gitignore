@@ -6,3 +6,9 @@ build/*.ui
 build/StockTicker 
 StockTicker/StockTicker.pro.user
 StockTicker/unittests/Tests
+*.o
+StockTicker/unittests/moc_*.cpp
+StockTicker/unittests/ui_*.h
+StockTicker/unittests/moc_*.h
+StockTicker/unittests/.qmake.stash
+StockTicker/unittests/unittests
