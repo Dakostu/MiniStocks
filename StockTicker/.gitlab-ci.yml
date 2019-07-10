@@ -5,12 +5,14 @@ stages:
     
 build-qt:
     stage: build
-    script: - cd StockTicker
+    script: 
+            - cd StockTicker
             - make
 
 unit-tests:
     stage: test
-    script: - cd StockTicker
+    script: 
+            - cd StockTicker
             - cd unittests
             - make
             - ./unittests
