@@ -68,7 +68,7 @@ QString TickerItem::toString() {
     const QString tab("\t");
 
     return tickerSymbol.mid(0,9) + tab
-            + QString::number(value,'d',2) + tab + currency
+            + QString::number(value,'d',2)
             + tab + "("
             + colorizeText(getChangeSign() + QString::number(change,'d',2)+"%", getChangeColor())
             + ")";

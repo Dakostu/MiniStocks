@@ -21,8 +21,6 @@ class TickerItem {
     double value;
     QString currency;
     double change;
-    QString changeColor;
-    QString sign;
     std::vector<QString> itemData;
 
     TickerInfoDownloader infoDownloader;
