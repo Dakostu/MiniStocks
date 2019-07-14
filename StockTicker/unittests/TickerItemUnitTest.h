@@ -2,7 +2,10 @@
 
 class TickerItemUnitTest : public QObject {
     Q_OBJECT
+private:
+    void testCSVParsing (QString ticker, double change, double price);
 private slots:
     void instantiateTickerItemTest();
-    void componentCSVParsingTest();
+    void componentCSVParsingTestPositiveGrowth();
+    void componentCSVParsingTestNegativeGrowth();
 };
