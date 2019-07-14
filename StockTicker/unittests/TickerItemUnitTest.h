@@ -8,4 +8,5 @@ private slots:
     void instantiateTickerItemTest();
     void componentCSVParsingTestPositiveGrowth();
     void componentCSVParsingTestNegativeGrowth();
+    void componentCSVParsingTestNoGrowth();
 };
