@@ -19,13 +19,12 @@ TickerItem::TickerItem(QString symbol) : tickerSymbol(symbol.toUpper()), infoDow
 }
 
 // load new data
-void TickerItem::loadItemData() {
-    itemData = infoDownloader.getData();
-    assignComponents(itemData);
+std::vector<QString> TickerItem::downloadItemData() {
+    return infoDownloader.getData();
 }
 
 // assigns parsed data from CSV file to TickerItem components
-void TickerItem::assignComponents(std::vector<QString> &parsedCSV) {
+void TickerItem::assignNewItemData(std::vector<QString> &parsedCSV) {
     try {
         value = parsedCSV.at(2).toDouble();
         change = (value - parsedCSV.at(1).toDouble()) / value;

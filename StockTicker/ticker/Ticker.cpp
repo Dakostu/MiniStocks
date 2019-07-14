@@ -75,7 +75,8 @@ void Ticker::loadTickersFromVector(const std::vector<QString> &tickerVec) {
     ticker.clear();
     for (auto tickerItem : tickerVec) {
         TickerItem temp(tickerItem);
-        temp.loadItemData();
+        auto tempInfo = temp.downloadItemData();
+        temp.assignNewItemData(tempInfo);
         ticker.emplace_back(temp);
     }
 

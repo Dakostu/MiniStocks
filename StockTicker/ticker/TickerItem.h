@@ -27,7 +27,6 @@ class TickerItem {
 
     TickerInfoDownloader infoDownloader;
 
-    void assignComponents(std::vector<QString> &parsedCSV);
     QString buildColorblock (const QString &color);
     QString colorizeText (const QString &message, const QString &color);
 
@@ -37,7 +36,8 @@ public:
     QString gettickerSymbol();
     QString getPrice();
     QString getChange();
-    void loadItemData();
+    std::vector<QString> downloadItemData();
+    void assignNewItemData(std::vector<QString> &parsedCSV);
 
 protected:
 
