@@ -75,18 +75,18 @@ bool SettingsDialog::saveAndClose() {
 
     if (ui->savedTickList->count() == 0     // If an empty list is saved..
             && !warnAboutEmptyTicker()) {   // and user clicked Cancel on warning window...
-        readTickers();                      // -> load previously saved tickers
         return false;                       // -> do not save and close warning window
     }
 
     std::vector<QString> newList;
     for (int i = 0; i < ui->savedTickList->count(); ++i)
-        newList.push_back(ui->savedTickList->item(i)->text());
+        newList.emplace_back(ui->savedTickList->item(i)->text());
 
     qDebug() << "Saving";
 
     File saveFile(File::getSaveName());
     saveFile.saveContentsToFile(newList);
+    emit this->newTickerList();
     return this->close();
 
 }

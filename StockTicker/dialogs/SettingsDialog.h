@@ -38,7 +38,8 @@ public slots:
     bool saveAndClose();
 
 
-
+signals:
+    void newTickerList();
 
 };
 
