@@ -3,7 +3,7 @@ stages:
     - test
     
 build-qt:
-    image: image: vookimedlo/ubuntu-qt:latestDistroOfficial_gcc_bionic
+    image: vookimedlo/ubuntu-qt:latestDistroOfficial_gcc_bionic
     stage: build
     script: 
             - cd StockTicker
