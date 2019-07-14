@@ -15,6 +15,5 @@ unit-tests:
     script: 
             - cd StockTicker
             - cd unittests
-            - qmake
             - make
             - ./unittests
