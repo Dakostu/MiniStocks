@@ -3,6 +3,15 @@
 
 #TARGET = MS-unittests
 
+QT += core gui
+QT += testlib
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TEMPLATE = app
+TARGET = unittests
+INCLUDEPATH += .
+
 HEADERS = \
    $$PWD/TickerItemUnitTest.h
 
@@ -14,5 +23,5 @@ SOURCES = \
 INCLUDEPATH = \
     $$PWD/.
 
-#DEFINES = 
+#DEFINES =
 
