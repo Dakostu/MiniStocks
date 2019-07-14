@@ -12,3 +12,6 @@ StockTicker/unittests/ui_*.h
 StockTicker/unittests/moc_*.h
 StockTicker/unittests/.qmake.stash
 StockTicker/unittests/unittests
+StockTicker/unittests/build/unittests
+StockTicker/unittests/build/*.cpp
+StockTicker/unittests/build/*.o
