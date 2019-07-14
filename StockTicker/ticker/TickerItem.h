@@ -36,6 +36,7 @@ public:
     QString gettickerSymbol();
     QString getPrice();
     QString getChange();
+    QString getChangeWithColor();
     std::vector<QString> downloadItemData();
     void assignNewItemData(std::vector<QString> &parsedCSV);
 

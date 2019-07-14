@@ -50,10 +50,12 @@ QString TickerItem::gettickerSymbol() { return tickerSymbol.mid(0,9); }
 
 QString TickerItem::getPrice() { return QString::number(value,'d',2);}
 
-QString TickerItem::getChange() {
+QString TickerItem::getChange() { return QString::number(change,'d',2); }
+
+QString TickerItem::getChangeWithColor() {
     changeColor = (change < 0 ) ? "red" : "green";
     sign = (change >= 0) ? "+" : "";
-    return ("(" + colorizeText(sign + QString::number(change,'d',2)+"%", changeColor) + ")");
+    return ("(" + colorizeText(sign + getChange() + "%", changeColor) + ")");
 }
 
 // Old toString method, for debug purposes

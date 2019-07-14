@@ -96,7 +96,7 @@ QString Ticker::dataToString(const WhatData& whatData) {
     std::vector<std::function<QString(TickerItem)>> dataCallbacks
                                                  = {&TickerItem::gettickerSymbol,
                                                     &TickerItem::getPrice,
-                                                    &TickerItem::getChange};
+                                                    &TickerItem::getChangeWithColor};
 
     std::vector<QString> tempVec;
 
