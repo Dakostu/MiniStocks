@@ -33,7 +33,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    Ticker instance = Ticker::getInstance();
+    Ticker tickerInstance = Ticker::getInstance();
     QPoint mpos;
 
 
@@ -52,6 +52,7 @@ protected:
 
 public slots:
     void showContextMenu(const QPoint& pos);
+    void reloadTickersFromFile();
     void increaseFontSize();
     void decreaseFontSize();
     void openSettings();

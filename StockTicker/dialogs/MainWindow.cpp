@@ -41,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)),
         this, SLOT(showContextMenu(const QPoint&)));
+    connect(this, SIGNAL(settingsDia.newTickerList()), this, SLOT(reloadTickersFromFile()));
 
     loadStockData();
 
@@ -128,11 +129,17 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
 // reload Ticker information and update graphical interface
 void MainWindow::loadStockData() {
 
-    instance = Ticker::getInstance();
+    tickerInstance = Ticker::getInstance();
 
-    ui->symbolColumn->setText(instance.symbolsToString());
-    ui->priceColumn->setText(instance.priceToString());
-    ui->changColumn->setText(instance.changeToString());
+    ui->symbolColumn->setText(tickerInstance.symbolsToString());
+    ui->priceColumn->setText(tickerInstance.priceToString());
+    ui->changColumn->setText(tickerInstance.changeToString());
+
+}
+
+void MainWindow::reloadTickersFromFile() {
+
+    tickerInstance.loadTickerSymbolsFromSettingsFile();
 
 }
 
@@ -141,7 +148,6 @@ void MainWindow::loadStockData() {
 void MainWindow::endProgram() {
     emit exitProg();
 }
-
 
 
 
