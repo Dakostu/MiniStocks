@@ -1,9 +1,9 @@
-image: vookimedlo/ubuntu-qt:latestDistroOfficial_gcc_bionic
 stages:
     - build
     - test
     
 build-qt:
+    image: image: vookimedlo/ubuntu-qt:latestDistroOfficial_gcc_bionic
     stage: build
     script: 
             - cd StockTicker
@@ -11,6 +11,7 @@ build-qt:
             - make
 
 unit-tests:
+    image: approximator/qttest
     stage: test
     script: 
             - cd StockTicker
