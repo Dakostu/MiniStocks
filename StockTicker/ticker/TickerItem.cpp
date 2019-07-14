@@ -52,25 +52,25 @@ QString TickerItem::getPrice() { return QString::number(value,'d',2);}
 
 QString TickerItem::getChange() { return QString::number(change,'d',2); }
 
-QString TickerItem::getChangeWithColor() {
-    changeColor = (change < 0 ) ? "red" : "green";
-    sign = (change >= 0) ? "+" : "";
-    return ("(" + colorizeText(sign + getChange() + "%", changeColor) + ")");
+QString TickerItem::getChangeColor() { return (change < 0 ) ? "red" : "green"; }
+
+QString TickerItem::getChangeSign() { return (change >= 0) ? "+" : ""; }
+
+QString TickerItem::getChangeHTMLOutput() {
+    return ("(" + colorizeText(getChangeSign() + getChange() + "%", getChangeColor()) + ")");
 }
 
 // Old toString method, for debug purposes
 QString TickerItem::toString() {
 
     // Percentage shall be either in green or red color, depending on sign
-    changeColor = (change < 0 ) ? "red" : "green";
-    sign = (change >= 0) ? "+" : "";
 
     const QString tab("\t");
 
     return tickerSymbol.mid(0,9) + tab
             + QString::number(value,'d',2) + tab + currency
             + tab + "("
-            + colorizeText(sign + QString::number(change,'d',2)+"%", changeColor)
+            + colorizeText(getChangeSign() + QString::number(change,'d',2)+"%", getChangeColor())
             + ")";
 }
 
