@@ -1,8 +1,9 @@
-#include "TickerItemUnitTest.h"
+#include "ministockunittests.h"
 #include "../ticker/TickerItem.h"
+#include <QtTest/QtTest>
 #include <QString>
 
-void TickerItemUnitTest::instantiateTickerItemTest() {
+void MiniStockUnitTests::instantiateTickerItemTest() {
 
     TickerItem item("stock");
     QCOMPARE("STOCK", item.gettickerSymbol());
@@ -12,7 +13,7 @@ void TickerItemUnitTest::instantiateTickerItemTest() {
 }
 
 
-void TickerItemUnitTest::testCSVParsing(QString ticker, double oldPrice, double newPrice) {
+void MiniStockUnitTests::testCSVParsing(QString ticker, double oldPrice, double newPrice) {
     TickerItem item(ticker);
     QCOMPARE(item.gettickerSymbol(), QString(ticker).mid(0,9));
     std::vector<QString> components = {ticker, QString::number(oldPrice), QString::number(newPrice)};
@@ -30,17 +31,17 @@ void TickerItemUnitTest::testCSVParsing(QString ticker, double oldPrice, double 
 
 }
 
-void TickerItemUnitTest::componentCSVParsingTestPositiveGrowth() {
+void MiniStockUnitTests::componentCSVParsingTestPositiveGrowth() {
     testCSVParsing(QString("ABC"), 12.5, 39.00);
 }
 
-void TickerItemUnitTest::componentCSVParsingTestNegativeGrowth() {
+void MiniStockUnitTests::componentCSVParsingTestNegativeGrowth() {
     testCSVParsing(QString("REALLYLONGCOMPANY"), 130.5, 129.00);
 }
 
-void TickerItemUnitTest::componentCSVParsingTestNoGrowth() {
+void MiniStockUnitTests::componentCSVParsingTestNoGrowth() {
     testCSVParsing(QString("REALLYLONGCOMPANY"), 20.05, 20.05000);
 }
 
 
-QTEST_MAIN(TickerItemUnitTest)
+QTEST_MAIN(MiniStockUnitTests)

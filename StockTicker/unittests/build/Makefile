@@ -52,17 +52,17 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../TickerItemUnitTest.cpp \
-		../../file/File.cpp \
+SOURCES       = ../../file/File.cpp \
 		../unittestmain.cpp \
 		../../ticker/TickerInfoDownloader.cpp \
-		../../ticker/TickerItem.cpp moc_TickerItemUnitTest.cpp
-OBJECTS       = TickerItemUnitTest.o \
-		File.o \
+		../../ticker/TickerItem.cpp \
+		../ministockunittests.cpp moc_ministockunittests.cpp
+OBJECTS       = File.o \
 		unittestmain.o \
 		TickerInfoDownloader.o \
 		TickerItem.o \
-		moc_TickerItemUnitTest.o
+		ministockunittests.o \
+		moc_ministockunittests.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -360,14 +360,14 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		../../MS-unittests.pro ../TickerItemUnitTest.h \
-		../../file/File.h \
+		../../MS-unittests.pro ../../file/File.h \
 		../../ticker/TickerInfoDownloader.h \
-		../../ticker/TickerItem.h ../TickerItemUnitTest.cpp \
-		../../file/File.cpp \
+		../../ticker/TickerItem.h \
+		../ministockunittests.h ../../file/File.cpp \
 		../unittestmain.cpp \
 		../../ticker/TickerInfoDownloader.cpp \
-		../../ticker/TickerItem.cpp
+		../../ticker/TickerItem.cpp \
+		../ministockunittests.cpp
 QMAKE_TARGET  = unittests
 DESTDIR       = 
 TARGET        = unittests
@@ -991,8 +991,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../TickerItemUnitTest.h ../../file/File.h ../../ticker/TickerInfoDownloader.h ../../ticker/TickerItem.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../TickerItemUnitTest.cpp ../../file/File.cpp ../unittestmain.cpp ../../ticker/TickerInfoDownloader.cpp ../../ticker/TickerItem.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../file/File.h ../../ticker/TickerInfoDownloader.h ../../ticker/TickerItem.h ../ministockunittests.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../file/File.cpp ../unittestmain.cpp ../../ticker/TickerInfoDownloader.cpp ../../ticker/TickerItem.cpp ../ministockunittests.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1023,13 +1023,13 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -W -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_TickerItemUnitTest.cpp
+compiler_moc_header_make_all: moc_ministockunittests.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_TickerItemUnitTest.cpp
-moc_TickerItemUnitTest.cpp: ../TickerItemUnitTest.h \
+	-$(DEL_FILE) moc_ministockunittests.cpp
+moc_ministockunittests.cpp: ../ministockunittests.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/dk/Documents/Code/C++/QT/MiniStocks/StockTicker/unittests/build/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/dk/Documents/Code/C++/QT/MiniStocks/StockTicker/unittests -I/home/dk/Documents/Code/C++/QT/MiniStocks/StockTicker/unittests -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtTest -I/usr/include/qt/QtCore -I. -I/usr/include/c++/9.1.0 -I/usr/include/c++/9.1.0/x86_64-pc-linux-gnu -I/usr/include/c++/9.1.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/include-fixed -I/usr/include ../TickerItemUnitTest.h -o moc_TickerItemUnitTest.cpp
+	/usr/bin/moc $(DEFINES) --include /home/dk/Documents/Code/C++/QT/MiniStocks/StockTicker/unittests/build/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/dk/Documents/Code/C++/QT/MiniStocks/StockTicker/unittests -I/home/dk/Documents/Code/C++/QT/MiniStocks/StockTicker/unittests -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtTest -I/usr/include/qt/QtCore -I. -I/usr/include/c++/9.1.0 -I/usr/include/c++/9.1.0/x86_64-pc-linux-gnu -I/usr/include/c++/9.1.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/include-fixed -I/usr/include ../ministockunittests.h -o moc_ministockunittests.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1047,15 +1047,10 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ####### Compile
 
-TickerItemUnitTest.o: ../TickerItemUnitTest.cpp ../TickerItemUnitTest.h \
-		../../ticker/TickerItem.h \
-		../../ticker/TickerInfoDownloader.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TickerItemUnitTest.o ../TickerItemUnitTest.cpp
-
 File.o: ../../file/File.cpp ../../file/File.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o File.o ../../file/File.cpp
 
-unittestmain.o: ../unittestmain.cpp ../TickerItemUnitTest.h
+unittestmain.o: ../unittestmain.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unittestmain.o ../unittestmain.cpp
 
 TickerInfoDownloader.o: ../../ticker/TickerInfoDownloader.cpp ../../file/File.h \
@@ -1067,8 +1062,13 @@ TickerItem.o: ../../ticker/TickerItem.cpp ../../file/File.h \
 		../../ticker/TickerInfoDownloader.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TickerItem.o ../../ticker/TickerItem.cpp
 
-moc_TickerItemUnitTest.o: moc_TickerItemUnitTest.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_TickerItemUnitTest.o moc_TickerItemUnitTest.cpp
+ministockunittests.o: ../ministockunittests.cpp ../ministockunittests.h \
+		../../ticker/TickerItem.h \
+		../../ticker/TickerInfoDownloader.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ministockunittests.o ../ministockunittests.cpp
+
+moc_ministockunittests.o: moc_ministockunittests.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ministockunittests.o moc_ministockunittests.cpp
 
 ####### Install
 

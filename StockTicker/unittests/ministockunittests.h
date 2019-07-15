@@ -1,9 +1,9 @@
-#ifndef TICKERITEMUNITTEST_H
-#define TICKERITEMUNITTEST_H
+#ifndef MINISTOCKUNITTESTS_H
+#define MINISTOCKUNITTESTS_H
 
-#include <QtTest/QtTest>
+#include <QObject>
 
-class TickerItemUnitTest : public QObject {
+class MiniStockUnitTests : public QObject {
     Q_OBJECT
 private:
     void testCSVParsing (QString ticker, double change, double price);
@@ -14,4 +14,5 @@ private slots:
     void componentCSVParsingTestNoGrowth();
 };
 
-#endif
+
+#endif // MINISTOCKUNITTESTS_H
