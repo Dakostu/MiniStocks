@@ -6,12 +6,8 @@
 class TickerUnitTest : public QObject
 {
     Q_OBJECT
-public:
-    explicit TickerUnitTest(QObject *parent = nullptr);
 
-signals:
-
-public slots:
+private slots:
 };
 
 #endif // TICKERUNITTEST_H

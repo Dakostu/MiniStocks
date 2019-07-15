@@ -17,14 +17,16 @@ HEADERS = \
    $$PWD/TickerItemUnitTest.h \
    $$PWD/../file/File.h \
    $$PWD/../ticker/TickerInfoDownloader.h \
-   $$PWD/../ticker/TickerItem.h
+   $$PWD/../ticker/TickerItem.h \
+   TickerUnitTest.h
 
 SOURCES = \
    $$PWD/TickerItemUnitTest.cpp \
    $$PWD/../file/File.cpp \
    $$PWD/unittestmain.cpp \
    $$PWD/../ticker/TickerInfoDownloader.cpp \
-   $$PWD/../ticker/TickerItem.cpp
+   $$PWD/../ticker/TickerItem.cpp \
+   TickerUnitTest.cpp
 
 INCLUDEPATH = \
     $$PWD/.
