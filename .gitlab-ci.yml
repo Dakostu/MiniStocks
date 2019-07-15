@@ -15,7 +15,7 @@ unit-tests:
     stage: test
     script: 
             - apt-get update
-            - apt-get install libqt5test5
+            - yes | apt-get install libqt5test5
             - cd StockTicker
             - cd unittests
             - cd build
