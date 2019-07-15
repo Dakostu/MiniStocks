@@ -5,7 +5,6 @@
 
 QT += core gui
 QT += network
-QT += testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,14 +16,13 @@ HEADERS = \
    $$PWD/../file/File.h \
    $$PWD/../ticker/TickerInfoDownloader.h \
    $$PWD/../ticker/TickerItem.h \
-   ministockunittests.h
+   catch.hpp
 
 SOURCES = \
    $$PWD/../file/File.cpp \
    $$PWD/unittestmain.cpp \
    $$PWD/../ticker/TickerInfoDownloader.cpp \
-   $$PWD/../ticker/TickerItem.cpp \
-   ministockunittests.cpp
+   $$PWD/../ticker/TickerItem.cpp
 
 INCLUDEPATH = \
     $$PWD/.

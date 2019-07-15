@@ -1,4 +1,4 @@
-image: darkmattercoder/qt-build:latest
+image: vookimedlo/ubuntu-qt:latestDistroOfficial_gcc_bionic
     
 stages:
     - build
