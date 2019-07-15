@@ -13,9 +13,6 @@ build-qt:
 
 unit-tests:
     stage: test
-    before_script:
-            - sudo apt-get update
-            - yes | sudo apt-get install libqt5test5
     variables: 
         QT_QPA_PLATFORM: "offscreen"
     script: 

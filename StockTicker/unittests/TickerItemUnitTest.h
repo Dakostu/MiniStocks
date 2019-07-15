@@ -1,3 +1,6 @@
+#ifndef TICKERITEMUNITTEST_H
+#define TICKERITEMUNITTEST_H
+
 #include <QtTest/QtTest>
 
 class TickerItemUnitTest : public QObject {
@@ -10,3 +13,5 @@ private slots:
     void componentCSVParsingTestNegativeGrowth();
     void componentCSVParsingTestNoGrowth();
 };
+
+#endif
