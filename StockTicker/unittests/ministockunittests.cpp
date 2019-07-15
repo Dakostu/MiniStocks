@@ -44,4 +44,5 @@ void MiniStockUnitTests::componentCSVParsingTestNoGrowth() {
 }
 
 
+
 QTEST_MAIN(MiniStockUnitTests)

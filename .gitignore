@@ -15,4 +15,6 @@ StockTicker/unittests/unittests
 StockTicker/unittests/build/unittests
 StockTicker/unittests/build/*.cpp
 StockTicker/unittests/build/*.o
+StockTicker/unittests/build/*.h
 StockTicker/unittests/MS-unittests.pro.user
+StockTicker/.qmake.stash
