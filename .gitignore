@@ -15,3 +15,4 @@ StockTicker/unittests/unittests
 StockTicker/unittests/build/unittests
 StockTicker/unittests/build/*.cpp
 StockTicker/unittests/build/*.o
+StockTicker/unittests/MS-unittests.pro.user

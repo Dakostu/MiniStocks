@@ -13,9 +13,12 @@ build-qt:
 
 unit-tests:
     stage: test
-    script: 
-            - apt-get update
+    before_script:
+            - sudo apt-get update
             - yes | apt-get install libqt5test5
+    variables: 
+        QT_QPA_PLATFORM: "offscreen"
+    script: 
             - cd StockTicker
             - cd unittests
             - cd build
