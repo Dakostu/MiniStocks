@@ -65,9 +65,11 @@ void SettingsDialog::removeTicker() { qDeleteAll(ui->savedTickList->selectedItem
 void SettingsDialog::readTickers() {
     File saveFile(File::getSaveName());
 
-    auto savedTickers = saveFile.loadContents();
-    for (auto ticker : savedTickers)
-        ui->savedTickList->addItem(ticker);
+    if (saveFile.fileIsValid()) {
+        for (auto ticker : saveFile.loadContents())
+            ui->savedTickList->addItem(ticker);
+    }
+
 }
 
 // Save QList into savefile and close window
