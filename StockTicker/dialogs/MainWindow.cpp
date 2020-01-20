@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)),
         this, SLOT(showContextMenu(const QPoint&)));
-    connect(this, SIGNAL(settingsDia.newTickerList()), this, SLOT(reloadTickersFromFile()));
+    connect(&settingsDia, SIGNAL(newTickerList()), this, SLOT(reloadTickersFromFile()));
 
     loadStockData();
 
