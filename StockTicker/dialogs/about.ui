@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="titleLabel">
      <property name="font">
       <font>
        <family>xos4 Terminus</family>
@@ -36,9 +36,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="aboutLabel">
      <property name="text">
-      <string>Made by Daniel Kostuj 2019 (GPL v2)
+      <string>Made by Daniel Kostuj $CUR$ (GPL v2)
 
 This program is an open-source project.
 Feel free to contribute at:
@@ -50,7 +50,7 @@ Feel free to contribute at:
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="linkLabel">
      <property name="text">
       <string>&lt;html&gt;&lt;a href=&quot;https://github.com/Dakostu/MiniStocks&quot;&gt;https://github.com/Dakostu/MiniStocks&lt;/a&gt;&lt;/html&gt;
 </string>
