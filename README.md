@@ -10,6 +10,8 @@ As of now, MiniStocks is in version of 0.2 which means "barely functional". It i
 
 # How to install MiniStocks
 
+You can clone this repository, or download the Debian package ["ministocks"](https://repology.org/project/ministocks/versions), available on the systems listed [here](https://buildd.debian.org/status/package.php?p=ministocks).
+
 MiniStocks is a QMake project that can be opened with Qt Creator, but it can be also compiled via the following Terminal commands:
 
 1. `qmake StockTicker.pro` (optional if the supplied Makefile doesn't work)
