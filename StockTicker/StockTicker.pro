@@ -9,7 +9,7 @@ QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = MiniStocks
+TARGET = ministocks
 TEMPLATE = app
 
 # check if compiling computer has libcurl library
@@ -64,6 +64,6 @@ FORMS += \
 target.path = /usr/local/bin
 
 desktop.path = /usr/share/applications
-desktop.files += icons/
+desktop.files += icons/ministocks.desktop
 
 INSTALLS += target desktop
