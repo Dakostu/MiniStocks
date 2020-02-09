@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>ministocks-icon.svg</file>
+    </qresource>
+</RCC>
