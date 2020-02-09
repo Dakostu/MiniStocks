@@ -61,3 +61,9 @@ FORMS += \
     dialogs/mainwindow.ui \
     dialogs/settingsdialog.ui \
 
+target.path = /usr/local/bin
+
+desktop.path = /usr/share/applications
+desktop.files += icons/
+
+INSTALLS += target desktop
