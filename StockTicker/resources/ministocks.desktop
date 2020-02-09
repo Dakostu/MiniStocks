@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=0.2
+Name=MiniStocks
+Comment=A minimalistic QT5 stock ticker
+Type=Application
+Icon=ministocks
+Terminal=false
+Exec=ministocks
+Categories=Utility;Finance;

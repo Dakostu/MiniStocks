@@ -41,7 +41,7 @@ private:
 
 protected:
     QString currentFont;
-    unsigned fontSize;
+    int fontSize;
     SettingsDialog settingsDia;
     About aboutDialog;
 

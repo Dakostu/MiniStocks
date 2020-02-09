@@ -1,0 +1,11 @@
+[Icon Theme]
+Name=Ministocks
+Comment=Icon theme for Ministocks (https://github.com/Dakostu/MiniStocks)
+Directories=scalable/apps
+
+[scalable/apps]
+Size=48
+Type=Scalable
+MinSize=1
+MaxSize=256
+Context=Applications

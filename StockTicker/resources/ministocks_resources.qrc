@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>icons/index.theme</file>
+        <file>icons/scalable/apps/ministocks.svg</file>
+    </qresource>
+</RCC>
