@@ -64,6 +64,11 @@ FORMS += \
 target.path = /usr/local/bin
 
 desktop.path = /usr/share/applications
-desktop.files += icons/ministocks.desktop
+desktop.files += resources/ministocks.desktop
 
-INSTALLS += target desktop
+icons.path = /usr/share/icons/hicolor/scalable/apps
+icons.files += resources/icons/scalable/apps/ministocks.svg
+
+INSTALLS += target desktop icons
+
+RESOURCES += resources/ministocks_resources.qrc
