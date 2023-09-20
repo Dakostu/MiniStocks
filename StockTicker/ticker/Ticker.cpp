@@ -27,7 +27,7 @@ File Ticker::savedTickers(File::getSaveName());
 // Ticker is instantiated by either creating a default or loading savefile
 Ticker::Ticker() {
 
-    loadedTickerSymbols = loadTickerSymbolsFromSettingsFile();
+    loadTickerSymbolsFromSettingsFile();
 
 }
 
@@ -36,7 +36,7 @@ Ticker::~Ticker() {
     savedTickers.saveContentsToFile(loadedTickerSymbols);
 }
 
-std::vector<QString> Ticker::loadTickerSymbolsFromSettingsFile() {
+void Ticker::loadTickerSymbolsFromSettingsFile() {
 
     ticker.clear();
 
@@ -48,7 +48,7 @@ std::vector<QString> Ticker::loadTickerSymbolsFromSettingsFile() {
         tempTickerSymbols = defaultTickers;
     }
 
-    return tempTickerSymbols;
+    loadedTickerSymbols = tempTickerSymbols;
 
 }
 

@@ -39,7 +39,7 @@ public:
     QString changeToString();
     QString toString();
     static Ticker& getInstance();
-    static std::vector<QString> loadTickerSymbolsFromSettingsFile();
+    static void loadTickerSymbolsFromSettingsFile();
 
 };
 
