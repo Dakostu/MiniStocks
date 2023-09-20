@@ -31,14 +31,17 @@ class Ticker {
     static File savedTickers;
 
 
-public:    
+public:
+    static inline const std::vector<QString> defaultTickers = {"^SPX","AAPL.US","GOOG.US","CL.F","GC.F","EURUSD"};
+
     ~Ticker();
-    std::vector<QString> getAllTickerSymbols();    
+    std::vector<QString> getAllTickerSymbols();
     QString symbolsToString();
     QString priceToString();
     QString changeToString();
     QString toString();
     static Ticker& getInstance();
+    static void pause(bool p);
     static void loadTickerSymbolsFromSettingsFile();
 
 };

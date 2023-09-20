@@ -42,7 +42,6 @@ private:
 protected:
     QString currentFont;
     int fontSize;
-    SettingsDialog settingsDia;
     About aboutDialog;
 
     void mousePressEvent(QMouseEvent *event) override;

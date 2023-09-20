@@ -41,7 +41,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)),
         this, SLOT(showContextMenu(const QPoint&)));
-    connect(&settingsDia, SIGNAL(newTickerList()), this, SLOT(reloadTickersFromFile()));
 
     loadStockData();
 
@@ -92,7 +91,18 @@ void MainWindow::showContextMenu(const QPoint& pos) {
 
 }
 
-void MainWindow::openSettings() { settingsDia.show(); }
+void MainWindow::openSettings() {
+    tickerInstance.pause(true);
+
+    auto settingsDia = new SettingsDialog(this);
+    connect(settingsDia, SIGNAL(newTickerList()), this, SLOT(reloadTickersFromFile()));
+    connect(settingsDia, &SettingsDialog::destroyed, [&]() {
+        tickerInstance.pause(false);
+    });
+    settingsDia->show();
+
+}
+
 void MainWindow::openAbout() { aboutDialog.show(); }
 
 // save position of clicked mouse
