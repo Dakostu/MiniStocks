@@ -9,7 +9,6 @@
  */
 
 
-#include "../file/File.h"
 #include "TickerItem.h"
 #include <QDebug>
 #include <string>
@@ -31,6 +30,10 @@ void TickerItem::assignNewItemData(std::vector<QString> &parsedCSV) {
     } catch (const std::exception& e) { // Spelling error? Connection problems? Stock not existing anymore?
         qDebug() << tickerSymbol << ":\t TickerItem can not be loaded";
         qDebug() << e.what();
+        if (!parsedCSV.empty()) {
+            qDebug() << "Output of TickerItem:";
+            qDebug() << parsedCSV;
+        }
         return;
     }
 

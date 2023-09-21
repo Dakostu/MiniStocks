@@ -28,6 +28,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     ui(new Ui::SettingsDialog)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose, true);
     connect(ui->addTickerButton, &QPushButton::clicked, this, &SettingsDialog::addTicker);
     connect(ui->delTickerButton, &QPushButton::clicked, this, &SettingsDialog::removeTicker);
     connect(ui->okButton, &QPushButton::clicked, this, &SettingsDialog::saveAndClose);
@@ -66,7 +67,7 @@ void SettingsDialog::readTickers() {
     File saveFile(File::getSaveName());
 
     if (saveFile.fileIsValid()) {
-        for (auto ticker : saveFile.loadContents())
+        for (const auto& ticker : saveFile.loadContents())
             ui->savedTickList->addItem(ticker);
     }
 
@@ -83,6 +84,10 @@ bool SettingsDialog::saveAndClose() {
     std::vector<QString> newList;
     for (int i = 0; i < ui->savedTickList->count(); ++i)
         newList.emplace_back(ui->savedTickList->item(i)->text());
+
+    if (newList.empty()) {
+        newList = Ticker::defaultTickers;
+    }
 
     qDebug() << "Saving";
 
